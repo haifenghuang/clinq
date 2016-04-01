@@ -16,22 +16,21 @@
 #define EQ_COMPARITOR	int (*equality_comparitor)	(void *objA, void *objB)
 #define TRANSFORM			(*transform)			(void *obj)
 
+//TODO remove(?)
+typedef struct clq_array clq_array_t;
+typedef struct clq_list clq_list_t;
 
-typedef struct c_array carr_t;
-typedef struct c_list clist_t;
-typedef struct c_dict cdict_t;
-
-typedef enum clinq_type {
+typedef enum clq_type {
 	ARRAY,
 	LIST,
 	DICTIONARY
-} clinq_type;
+} clq_type;
 
 
-typedef struct clinq_colleciton
+typedef struct clq_colleciton
 {
 	void		  *data;
-	clinq_type	  type;
+	clq_type	  type;
 
 	int			  (*all)				(COLLECTION *src, PREDICATE);							//ALL - Predicate returns true or false for each item.
 	int			  (*any)				(COLLECTION *src, PREDICATE);							//ANY - Predicate returns true of false for each item.
@@ -46,7 +45,7 @@ typedef struct clinq_colleciton
 	void		* (*max)				(COLLECTION *src, int TRANSFORM);						//MAX - Gets the max value after transforming each value in sequence
 	void		* (*min)				(COLLECTION *src, int TRANSFORM);						//MIN - Gets the min value after transforming each value in sequence	
 	void		* (*single)				(COLLECTION *src, PREDICATE, void *default_value);		//SINGLE - Gets the only value to match the predicate, or default value if more than one match
-	COLLECTION	* (*concat)				(COLLECTION *src, void *dest);							//CONCAT - Joins 2 things together
+	COLLECTION	* (*concat)				(COLLECTION *src, COLLECTION *second);					//CONCAT - Joins 2 things together
 	COLLECTION	* (*default_if_empty)	(COLLECTION *src, void *default_value);					//DEFAULT-IF-EMPTY - Returns either the sequence or a new sequence containing the default value if empty
 	COLLECTION	* (*distinct)			(COLLECTION *src, EQ_COMPARITOR);						//DISTINCT - Returns the distinct elements in the sequence matching comparitor
 	COLLECTION	* (*except)				(COLLECTION *src, EQ_COMPARITOR);						//EXCEPT - Returns the set different using provided comparitor
@@ -64,7 +63,83 @@ typedef struct clinq_colleciton
 	//COLLECTION	(*cast)				(COLLECTION *src, clinq_type dest);						//CAST - Transforms the underlying representation from one type to another.
 	//int			(*eqauls)			(COLLECTION *src, COLLECTION *another);					//EQUALS - Return true is the 2 
 
-} collection_t;
+} clq_collection_t;
+
+
+#define CLQ_ALL(this, pred) \
+		(this)->all(this, pred)
+
+#define CLQ_ANY(this, pred) \
+		(this)->any(this, pred)
+
+#define CLQ_CONTAINS(this, element, comp) \
+		(this)->contains(this, element, comp)
+
+#define CLQ_COUNT(this, pred) \
+		(this)->count(this, pred)
+
+#define CLQ_SUM(this) \
+		(this)->sum(this)
+
+#define CLQ_LONG_COUNT(this, pred) \
+		(this)->long_count(this, pred)
+
+#define  CLQ_AVERAGE(this, trans) \
+		(this)->average(this, trans)
+
+#define CLQ_ELEMENT_AT(this, index, df_val) \
+		(this)->element_at(this, index, df_val)
+
+#define CLQ_FIRST(this, pred, df_val) \
+		(this)->first(this, pred, df_val)
+
+#define CLQ_LAST(this, pred, df_val) \
+		(this)->last(this, pred, df_val)
+
+#define CLQ_MAX(this, trans) \
+		(this)->max(this, trans)
+
+#define CLQ_MIN(this, trans) \
+		(this)->min(this, trans)
+
+#define CLQ_SINGLE(this, pred, df_val) \
+		(this)->single(this, pred, df_val)
+
+#define CLQ_CONCAT(this, second) \
+		(this)->contat(this, second)
+
+#define CLQ_DEFAULT_IF_EMPTY(this, df_val) \
+		(this)->default_if_empty(this, df_val)
+
+#define CLQ_DISTINCT(this, eq_comp) \
+		(this)->distinct(this, ep_comp)
+
+#define CLQ_EXCEPT(this, ep_comp) \
+		(this)->except(this, ep_comp)
+
+#define CLQ_INTERSECT(this, second, comp) \
+		(this)->set_intersect(this, second, comp)
+
+#define CLQ_REVERSE(this) \
+		(this)->reverse(this)
+
+#define CLQ_SKIP(this, index) \
+		(this)->skip(this, index)
+
+#define CLQ_SKIP_WHILE(this, pred) \
+		(this)->skip_while(this, pred)
+
+#define CLQ_TAKE(this, index) \
+		(this)->take(this, index)
+
+#define CLQ_TAKE_WHILE(this, pred) \
+		(this)->take_while(this, pred)
+
+#define CLQ_UNION(this, second) \
+		(this)->set_union(this, second)
+
+#define CLQ_WHERE(this, pred) \
+		(this)->where(this, pred)
 
 
 #endif
