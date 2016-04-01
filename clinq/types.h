@@ -8,6 +8,15 @@
 #include "dict.h"
 #include "list.h"
 
+
+#define COLLECTION		struct clinq_collection
+#define PREDICATE		int (*predicate)			(void *obj)
+#define INDEX_PREDICATE int (*predicate)			(void *obj, int index)
+#define COMPARITOR		int (*comparitor)			(void *objA, void *objB)
+#define EQ_COMPARITOR	int (*equality_comparitor)	(void *objA, void *objB)
+#define TRANSFORM			(*transform)			(void *obj)
+
+
 typedef struct c_array carr_t;
 typedef struct c_list clist_t;
 typedef struct c_dict cdict_t;
@@ -19,45 +28,43 @@ typedef enum clinq_type {
 } clinq_type;
 
 
-typedef struct cobj
+typedef struct clinq_colleciton
 {
-	void *data;
-	clinq_type type;
+	void		  *data;
+	clinq_type	  type;
 
-	// TODO  - Refactor some of this into MACROS / #DEFINES :O
-
-	long (*sum)(struct cobj *src);																							//SUM - NO PARAMS
-	int (*all) (struct cobj *src, int(*predicate)(void *obj));																//ALL - Predicate returns true or false for each item.
-	int(*any) (struct cobj *src, int(*predicate)(void *obj));																//ANY - Predicate returns true of false for each item.
-	float(*average) (struct cobj *src, int(transform)(void *obj));															//AVERAGE - Transform turns non-numerical types into a float value.
-	struct cobj *(*concat) (struct cobj *src, void *dest);																	//CONCAT - Joins 2 things together
-	int(*contains) (struct cobj *src, void *element, int(*comparitor)(void *element, void *obj));							//CONTAINS - Checks if object contains the specific element, with the given comparitor
-	int(*count) (struct cobj *src, int(*predicate)(void *obj));																//COUNT - The number of items that match the given predicate
-	struct cobj *(*default_if_empty) (struct cobj *src, void *default_value);												//DEFAULT-IF-EMPTY - Returns either the sequence or a new sequence containing the default value if empty
-	struct cobj *(*distinct) (struct cobj *src, int(*equality_comparitor)(void *objA, void* objB));							//DISTINCT - Returns the distinct elements in the sequence matching comparitor
-	void* (*element_at)(struct cobj *src, int index, void *default_value);													//ELEMENT-AT - Returns the element at the specified index, or defaul value if none-found
-	struct cobj *(*except)(struct cobj *src, int(*equality_comparitor)(void *objA, void *objB));							//EXCEPT - Returns the set different using provided comparitor
-	void *(*first)(struct cobj *src, int (*predicate)(void *obj), void *default_value);										//FIRST - Gets the first element to match predicate, or default value is none match
-	struct cobj *(*set_intersect)(struct cobj *src, struct cobj *second, int(*comparitor)(void *objA, void *objB));			//INTERSET - Performs set interst section on both seqeunces
-	void *(*last)(struct cobj *src, int(*predicate)(void *obj), void *default_value);										//LAST - Gets the last value to match the predicate, or default value if none match
-	long (*long_count) (struct cobj *src, int(*predicate)(void *obj));														//LONG-COUNT - The number of items that match the given predicate, as a long
-	void *(*max)(struct cobj *src, int(*transform)(void *obj));																//MAX - Gets the max value after transforming each value in sequence
-	void *(*min)(struct cobj *src, int(*transform)(void *obj));																//MIN - Gets the min value after transforming each value in sequence
-	struct cobj *(*reverse)(struct cobj *src);																				//REVERSE - Reverses the order of the elements in the underlying representation
-	void *(*single)(struct cobj *src, int(*predicate)(void *obj), void *default_value);										//SINGLE - Gets the only value to match the predicate, or default value if more than one match
-	struct cobj *(*skip)(struct cobj *src, int count);																		//SKIP - Gets a sequence missing the first count values
-	struct cobj *(*skip_while)(struct cobj *src, int(*predicate)(void *obj));												//SKIP-WHILE - Gets a sequence missing the first number of items that match the predicate
-	struct cobj *(*take)(struct cobj *src, int count);																		//TAKE - Gets a sequence containing the first count values
-	struct cobj *(*take_while)(struct cobj *src, int(*predicate)(void *obj));												//TAKE-WHILE - Gets a sequence containing the first number of items that match the predicate
-	struct cobj *(*set_union) (struct cobj *src, struct cobj *second, int(*equalilty_comparitor)(void *objA, void *objB));	//UNION - Gets the set union of the 2 sequences
-	struct cobj *(*where)(struct cobj *src, int(*predicate)(void *obj, int index));											//WHERE - Gets the values that match the predicate taking into account the index
+	int			  (*all)				(COLLECTION *src, PREDICATE);							//ALL - Predicate returns true or false for each item.
+	int			  (*any)				(COLLECTION *src, PREDICATE);							//ANY - Predicate returns true of false for each item.
+	int			  (*contains)			(COLLECTION *src, void *element, COMPARITOR);			//CONTAINS - Checks if object contains the specific element, with the given comparitor
+	int			  (*count)				(COLLECTION *src, PREDICATE);							//COUNT - The number of items that match the given predicate
+	long		  (*sum)				(COLLECTION *src);										//SUM - NO PARAMS
+	long		  (*long_count)			(COLLECTION *src, PREDICATE);							//LONG-COUNT - The number of items that match the given predicate, as a long
+	float		  (*average)			(COLLECTION *src, int TRANSFORM);						//AVERAGE - Transform turns non-numerical types into a float value.
+	void		* (*element_at)			(COLLECTION *src, int index, void *default_value);		//ELEMENT-AT - Returns the element at the specified index, or defaul value if none-found
+	void		* (*first)				(COLLECTION *src, PREDICATE, void *default_value);		//FIRST - Gets the first element to match predicate, or default value is none match	
+	void		* (*last)				(COLLECTION *src, PREDICATE, void *default_value);		//LAST - Gets the last value to match the predicate, or default value if none match	
+	void		* (*max)				(COLLECTION *src, int TRANSFORM);						//MAX - Gets the max value after transforming each value in sequence
+	void		* (*min)				(COLLECTION *src, int TRANSFORM);						//MIN - Gets the min value after transforming each value in sequence	
+	void		* (*single)				(COLLECTION *src, PREDICATE, void *default_value);		//SINGLE - Gets the only value to match the predicate, or default value if more than one match
+	COLLECTION	* (*concat)				(COLLECTION *src, void *dest);							//CONCAT - Joins 2 things together
+	COLLECTION	* (*default_if_empty)	(COLLECTION *src, void *default_value);					//DEFAULT-IF-EMPTY - Returns either the sequence or a new sequence containing the default value if empty
+	COLLECTION	* (*distinct)			(COLLECTION *src, EQ_COMPARITOR);						//DISTINCT - Returns the distinct elements in the sequence matching comparitor
+	COLLECTION	* (*except)				(COLLECTION *src, EQ_COMPARITOR);						//EXCEPT - Returns the set different using provided comparitor
+	COLLECTION	* (*set_intersect)		(COLLECTION *src, COLLECTION *second, COMPARITOR);		//INTERSET - Performs set interst section on both seqeunces
+	COLLECTION	* (*reverse)			(COLLECTION *src);										//REVERSE - Reverses the order of the elements in the underlying representation
+	COLLECTION	* (*skip)				(COLLECTION *src, int count);							//SKIP - Gets a sequence missing the first count values
+	COLLECTION	* (*skip_while)			(COLLECTION *src, PREDICATE);							//SKIP-WHILE - Gets a sequence missing the first number of items that match the predicate
+	COLLECTION	* (*take)				(COLLECTION *src, int count);							//TAKE - Gets a sequence containing the first count values
+	COLLECTION	* (*take_while)			(COLLECTION *src, PREDICATE);							//TAKE-WHILE - Gets a sequence containing the first number of items that match the predicate
+	COLLECTION	* (*set_union)			(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR);	//UNION - Gets the set union of the 2 sequences
+	COLLECTION	* (*where)				(COLLECTION *src, INDEX_PREDICATE);						//WHERE - Gets the values that match the predicate taking into account the index
 
 
 	//MAYBE
-	//clinq_t (*cast)(struct cobj *src, clinq_type dest);				//CAST - Transforms the underlying representation from one type to another.
-	//int(*eqauls)(struct cobj *src, struct cobj *another);				//EQUALS - Return true is the 2 
+	//COLLECTION	(*cast)				(COLLECTION *src, clinq_type dest);						//CAST - Transforms the underlying representation from one type to another.
+	//int			(*eqauls)			(COLLECTION *src, COLLECTION *another);					//EQUALS - Return true is the 2 
 
-} clinq_t;
+} collection_t;
 
 
 #endif
