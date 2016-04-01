@@ -13,10 +13,12 @@
 #define EQ_COMPARITOR	int (*equality_comparitor)	(void *objA, void *objB)
 #define TRANSFORM			(*transform)			(void *obj)
 
-typedef enum clq_type {
+typedef enum clq_type
+{
 	CLQ_ARRAY,
 	CLQ_LIST,
 } clq_type;
+
 
 typedef struct clq_colleciton
 {

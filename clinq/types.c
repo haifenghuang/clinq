@@ -16,7 +16,7 @@ clq_collection_t *clq_collection_create(clq_type type, int sz)
 
 	//Init the other sections here...
 
-	return NULL;
+	return collection;
 }
 
 

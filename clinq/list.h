@@ -5,7 +5,7 @@
 
 typedef struct clq_list clq_list_t;
 
-clq_collection_t *clq_list_create();
-void clq_list_destory(clq_collection_t *list);
+clq_list_t *clq_list_create();
+void clq_list_destory(clq_list_t *list);
 
 #endif

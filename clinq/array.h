@@ -10,8 +10,8 @@
 typedef struct clq_array clq_array_t;
 
 
-clq_collection_t *clq_array_create(int size);
-void clq_array_destory(clq_collection_t *array);
+clq_array_t *clq_array_create(int size);
+void clq_array_destory(clq_array_t *array);
 
 
 #endif
