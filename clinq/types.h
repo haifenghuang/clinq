@@ -5,7 +5,6 @@
 #define CLINQ_TYPES_H
 
 #include "array.h"
-#include "dict.h"
 #include "list.h"
 
 
@@ -64,82 +63,6 @@ typedef struct clq_colleciton
 	//int			(*eqauls)			(COLLECTION *src, COLLECTION *another);					//EQUALS - Return true is the 2 
 
 } clq_collection_t;
-
-
-#define CLQ_ALL(this, pred) \
-		(this)->all(this, pred)
-
-#define CLQ_ANY(this, pred) \
-		(this)->any(this, pred)
-
-#define CLQ_CONTAINS(this, element, comp) \
-		(this)->contains(this, element, comp)
-
-#define CLQ_COUNT(this, pred) \
-		(this)->count(this, pred)
-
-#define CLQ_SUM(this) \
-		(this)->sum(this)
-
-#define CLQ_LONG_COUNT(this, pred) \
-		(this)->long_count(this, pred)
-
-#define  CLQ_AVERAGE(this, trans) \
-		(this)->average(this, trans)
-
-#define CLQ_ELEMENT_AT(this, index, df_val) \
-		(this)->element_at(this, index, df_val)
-
-#define CLQ_FIRST(this, pred, df_val) \
-		(this)->first(this, pred, df_val)
-
-#define CLQ_LAST(this, pred, df_val) \
-		(this)->last(this, pred, df_val)
-
-#define CLQ_MAX(this, trans) \
-		(this)->max(this, trans)
-
-#define CLQ_MIN(this, trans) \
-		(this)->min(this, trans)
-
-#define CLQ_SINGLE(this, pred, df_val) \
-		(this)->single(this, pred, df_val)
-
-#define CLQ_CONCAT(this, second) \
-		(this)->contat(this, second)
-
-#define CLQ_DEFAULT_IF_EMPTY(this, df_val) \
-		(this)->default_if_empty(this, df_val)
-
-#define CLQ_DISTINCT(this, eq_comp) \
-		(this)->distinct(this, ep_comp)
-
-#define CLQ_EXCEPT(this, ep_comp) \
-		(this)->except(this, ep_comp)
-
-#define CLQ_INTERSECT(this, second, comp) \
-		(this)->set_intersect(this, second, comp)
-
-#define CLQ_REVERSE(this) \
-		(this)->reverse(this)
-
-#define CLQ_SKIP(this, index) \
-		(this)->skip(this, index)
-
-#define CLQ_SKIP_WHILE(this, pred) \
-		(this)->skip_while(this, pred)
-
-#define CLQ_TAKE(this, index) \
-		(this)->take(this, index)
-
-#define CLQ_TAKE_WHILE(this, pred) \
-		(this)->take_while(this, pred)
-
-#define CLQ_UNION(this, second) \
-		(this)->set_union(this, second)
-
-#define CLQ_WHERE(this, pred) \
-		(this)->where(this, pred)
 
 
 #endif

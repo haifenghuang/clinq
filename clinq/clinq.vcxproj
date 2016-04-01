@@ -75,13 +75,11 @@
   <ItemGroup>
     <ClInclude Include="array.h" />
     <ClInclude Include="clinq.h" />
-    <ClInclude Include="dict.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="array.c" />
-    <ClCompile Include="dict.c" />
     <ClCompile Include="list.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

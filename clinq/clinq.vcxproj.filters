@@ -11,9 +11,6 @@
     <ClInclude Include="list.h">
       <Filter>clinq</Filter>
     </ClInclude>
-    <ClInclude Include="dict.h">
-      <Filter>clinq</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="clinq">
@@ -23,6 +20,5 @@
   <ItemGroup>
     <ClCompile Include="array.c" />
     <ClCompile Include="list.c" />
-    <ClCompile Include="dict.c" />
   </ItemGroup>
 </Project>
