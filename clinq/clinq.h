@@ -4,8 +4,6 @@
 #ifndef CLINQ_H
 #define CLINQ_H
 
-#include "types.h"
-
 
 // ------------------
 // Easy Access Macros

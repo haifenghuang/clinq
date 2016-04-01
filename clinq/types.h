@@ -4,9 +4,7 @@
 #ifndef CLINQ_TYPES_H
 #define CLINQ_TYPES_H
 
-#include "array.h"
-#include "list.h"
-
+#include <stdio.h>
 
 #define COLLECTION		struct clinq_collection
 #define PREDICATE		int (*predicate)			(void *obj)
@@ -15,16 +13,10 @@
 #define EQ_COMPARITOR	int (*equality_comparitor)	(void *objA, void *objB)
 #define TRANSFORM			(*transform)			(void *obj)
 
-//TODO remove(?)
-typedef struct clq_array clq_array_t;
-typedef struct clq_list clq_list_t;
-
 typedef enum clq_type {
-	ARRAY,
-	LIST,
-	DICTIONARY
+	CLQ_ARRAY,
+	CLQ_LIST,
 } clq_type;
-
 
 typedef struct clq_colleciton
 {
@@ -63,6 +55,11 @@ typedef struct clq_colleciton
 	//int			(*eqauls)			(COLLECTION *src, COLLECTION *another);					//EQUALS - Return true is the 2 
 
 } clq_collection_t;
+
+// FUNCS
+
+clq_collection_t *clq_collection_create(clq_type type);
+void clq_collection_destory(clq_collection_t *collection);
 
 
 #endif

@@ -80,7 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="array.c" />
+    <ClCompile Include="clinq.c" />
     <ClCompile Include="list.c" />
+    <ClCompile Include="types.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
