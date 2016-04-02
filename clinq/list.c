@@ -115,10 +115,32 @@ int clq_list_delete_where(clq_list_t *src, PREDICATE, FREE_FUNC)
 	return 1;
 }
 
+int clq_list_insert_distinct(clq_list_t *src, EQ_COMPARITOR, void *element)
+{
+	if (!src) { return 0; }
 
-// TODO
+	//Check if it's already in existance
+	for (int i = 0; i < src->size; i++)
+	{
+		if (equality_comparitor(element, src->data[i])) { return 0; }
+	}
 
-int clq_list_insert_distinct(clq_list_t *src, int TRANSFORM, void *element) { return 0; }
+	//Resize list if required
+	if (src->size == src->array_size)
+	{
+		void **temp = realloc(src->data, sizeof(void *) * (src->array_size * 2));
+		if (!temp) { return 0; }
+
+		src->data = temp;
+		src->array_size *= 2;
+
+		printf("Reallocted to size: %d\n", src->array_size);
+	}
+
+	//Insert item
+	src->data[src->size++] = element;
+	return 1;
+}
 
 
 

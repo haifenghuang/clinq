@@ -7,7 +7,7 @@
 //Function Declarations
 //----------------------
 static int clq_collection_insert(COLLECTION *src, void *element);
-static int clq_collection_insert_distinct(COLLECTION *src, int TRANSFORM, void *element);
+static int clq_collection_insert_distinct(COLLECTION *src, EQ_COMPARITOR, void *element);
 static int clq_collection_delete(COLLECTION *src, FREE_FUNC);
 static int clq_collection_delete_where(COLLECTION *src, PREDICATE, FREE_FUNC);
 static int clq_collection_size(COLLECTION *src);
@@ -113,10 +113,10 @@ static int clq_collection_insert(COLLECTION *src, void *element)
 	if (!src) { return 0; }
 	return clq_list_insert(src->data, element);
 }	
-static int clq_collection_insert_distinct(COLLECTION *src, int TRANSFORM,  void *element)
+static int clq_collection_insert_distinct(COLLECTION *src, EQ_COMPARITOR,  void *element)
 {
 	if (!src) { return 0; }
-	return clq_list_insert_distinct(src->data, transform, element);
+	return clq_list_insert_distinct(src->data, equality_comparitor, element);
 }
 static int clq_collection_delete( COLLECTION *src, FREE_FUNC)
 {

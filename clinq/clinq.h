@@ -13,6 +13,9 @@
 #define CLQ_INSERT(collection, element) \
 		(collection)->insert(collection, element)
 
+#define CLQ_INSERT_DISTINCT(collection, eq_comparitor, element) \
+		(collection)->insert_distinct(collection, eq_comparitor, element)
+
 #define CLQ_DELETE(collection, free_func) \
 		(collection)->delete(collection, free_func)
 
