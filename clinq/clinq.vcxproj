@@ -78,6 +78,7 @@
     <ClInclude Include="functions.h" />
     <ClInclude Include="LINQ.h" />
     <ClInclude Include="linq_bool.h" />
+    <ClInclude Include="linq_data.h" />
     <ClInclude Include="linq_math.h" />
     <ClInclude Include="linq_query.h" />
     <ClInclude Include="linq_set.h" />
@@ -85,6 +86,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="collection.c" />
+    <ClCompile Include="linq_bool.c" />
+    <ClCompile Include="linq_data.c" />
+    <ClCompile Include="linq_math.c" />
+    <ClCompile Include="linq_query.c" />
+    <ClCompile Include="linq_set.c" />
     <ClCompile Include="list.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -109,7 +109,7 @@
 
 
 //Funcs
-clq_collection_t *clq_collection_create(void);
-void clq_collection_destory(clq_collection_t *collection);
+clq_collection_t *clq_create(void);
+void clq_destory(clq_collection_t *collection);
 
 #endif

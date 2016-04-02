@@ -7,15 +7,13 @@
 #include "list.h"
 #include "functions.h"
 
-void		*linq_element_at	(clq_list_t *src, int index, void *default_value);
-void		*linq_first			(clq_list_t *src, PREDICATE, void *default_value);
-void		*linq_last			(clq_list_t *src, PREDICATE, void *default_value);
-void		*linq_single		(clq_list_t *src, PREDICATE, void *default_value);
+int			linq_count			(COLLECTION *data, PREDICATE);
 
-COLLECTION	*linq_skip			(clq_list_t *src, int count);
-COLLECTION	*linq_skip_while	(clq_list_t *src, PREDICATE);
-COLLECTION	*linq_take			(clq_list_t *src, int count);
-COLLECTION	*linq_take_while	(clq_list_t *src, PREDICATE);
-COLLECTION	*linq_where			(clq_list_t *src, INDEX_PREDICATE);	
+void		*linq_element_at	(COLLECTION *src, int index, void *default_value);
+void		*linq_first			(COLLECTION *src, PREDICATE, void *default_value);
+void		*linq_last			(COLLECTION *src, PREDICATE, void *default_value);
+void		*linq_single		(COLLECTION *src, PREDICATE, void *default_value);
+
+COLLECTION	*linq_where			(COLLECTION *src, INDEX_PREDICATE);	
 
 #endif

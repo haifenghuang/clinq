@@ -26,6 +26,9 @@
     <ClInclude Include="functions.h">
       <Filter>Collection</Filter>
     </ClInclude>
+    <ClInclude Include="linq_data.h">
+      <Filter>LINQ\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="list.c">
@@ -33,6 +36,21 @@
     </ClCompile>
     <ClCompile Include="collection.c">
       <Filter>Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="linq_set.c">
+      <Filter>LINQ\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="linq_query.c">
+      <Filter>LINQ\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="linq_bool.c">
+      <Filter>LINQ\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="linq_math.c">
+      <Filter>LINQ\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="linq_data.c">
+      <Filter>LINQ\Impl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +62,9 @@
     </Filter>
     <Filter Include="LINQ\Headers">
       <UniqueIdentifier>{2be1a4ee-7f4b-4097-b6f8-aafd6ed9851c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LINQ\Impl">
+      <UniqueIdentifier>{197652f0-4147-4fd8-b1c5-d81d8c75b739}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

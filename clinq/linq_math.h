@@ -7,15 +7,14 @@
 #include "list.h"
 #include "functions.h"
 
-int		linq_count			(clq_list_t *data, PREDICATE);
-int		linq_max			(clq_list_t *data, int TRANSFORM);
-int		linq_min			(clq_list_t *data, int TRANSFORM);
+int		linq_max			(COLLECTION *data, int TRANSFORM);
+int		linq_min			(COLLECTION *data, int TRANSFORM);
 
-long	linq_sum			(clq_list_t *data, int TRANSFORM);
-long	linq_long_count		(clq_list_t *data, PREDICATE);
-float	linq_average		(clq_list_t *data, int TRANSFORM);
+long	linq_sum			(COLLECTION *data, int TRANSFORM);
+long	linq_long_count		(COLLECTION *data, PREDICATE);
+float	linq_average		(COLLECTION *data, int TRANSFORM);
 
-void	*linq_max_element	(clq_list_t *data, int TRANSFORM);
-void	*linq_min_element	(clq_list_t *data, int TRANSFORM);
+void	*linq_max_element	(COLLECTION *data, int TRANSFORM);
+void	*linq_min_element	(COLLECTION *data, int TRANSFORM);
 
 #endif

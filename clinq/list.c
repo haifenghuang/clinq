@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "list.h"
 
@@ -17,7 +18,7 @@ typedef struct clq_list_item
 
 clq_list_t *clq_list_create()
 {
-	clq_list_t* list = malloc(sizeof(clq_list_t));
+	clq_list_t *list = malloc(sizeof(clq_list_t));
 	if (!list) { return NULL; }
 
 	//Init the array elements here...
@@ -41,3 +42,12 @@ void clq_list_destory(clq_list_t *list)
 
 	free(list);
 }
+
+
+// TODO
+
+int clq_list_insert(COLLECTION *src, void *element) { return 0; }
+int clq_list_insert_distinct(COLLECTION *src, int TRANSFORM, void *element) { return 0; }
+int clq_list_delete(COLLECTION *src, FREE_FUNC) { return 0; }
+int clq_list_delete_where(COLLECTION *src, PREDICATE, FREE_FUNC) { return 0; }
+long clq_list_size(COLLECTION *src) { return 0L; }

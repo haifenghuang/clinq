@@ -50,20 +50,59 @@ struct clq_collection
 
 
 
-clq_collection_t *clq_collection_create()
+clq_collection_t *clq_create()
 {
 	clq_collection_t *collection = malloc(sizeof(clq_collection_t));
 	if (!collection) { return NULL; }
 
 	 collection->data = clq_list_create();
 
-	//Init the other sections here...
+	//Full out the functions of the collection
+	collection->insert = clq_list_insert;
+	collection->insert_distinct = clq_list_insert_distinct;
+	collection->delete = clq_list_delete;
+	collection->delete_where = clq_list_delete_where;
+	collection->size = clq_list_size;
+
+	collection->all = linq_all;
+	collection->any = linq_any;
+	collection->contains = linq_contains;
+
+	collection->count = linq_count;
+	collection->max_value = linq_max;
+	collection->min_value = linq_min;
+
+	collection->sum = linq_sum;
+	collection->long_count = linq_long_count;
+
+	collection->average = linq_average;
+
+	collection->element_at = linq_element_at;
+	collection->first = linq_first;
+	collection->last = linq_last;
+	collection->max_element = linq_max_element;
+	collection->min_element = linq_min_element;
+	collection->single = linq_single;
+
+	collection->concat = linq_concat;
+	collection->default_if_empty = linq_default_if_empty;
+	collection->distinct = linq_distinct;
+	collection->except = linq_except;
+	collection->set_intersect = linq_intersect;
+	collection->reverse = linq_reverse;
+	collection->skip = linq_skip;
+	collection->skip_while = linq_skip_while;
+	collection->take = linq_take;
+	collection->take_while = linq_take_while;
+	collection->set_union = linq_union;
+	collection->where = linq_where;
+	
 
 	return collection;
 }
 
 
-void clq_collection_destory(clq_collection_t *collection)
+void clq_destory(clq_collection_t *collection)
 {
 	if (collection)
 	{
