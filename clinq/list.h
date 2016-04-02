@@ -5,17 +5,17 @@
 
 #include "functions.h"
 
-typedef struct clq_list_item
-{
-	void *data;
-	struct clq_list_item *next;
-	struct clq_item_item *prev;
-}clq_item_t;
+//typedef struct clq_list_item
+//{
+//	void *data;
+//	struct clq_list_item *next;
+//	struct clq_item_item *prev;
+//}clq_item_t;
 
 typedef struct clq_list
 {
-	struct clq_list_item *head;
-	struct clq_list_item *tail;
+	void **data;
+	int array_size;
 	int size;
 } clq_list_t;
 
