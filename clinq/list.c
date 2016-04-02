@@ -48,10 +48,12 @@ int clq_list_insert(clq_list_t *src, void *element)
 
 	item->data = element;
 	item->next = src->head;
-	
-	src->head = item;
-	src->size++;
+	item->prev = NULL;
 
+	if (src->size == 0) { src->head = src->tail = item; }
+	else { src->head = item; }
+	
+	src->size++;
 	return 1;
 }
 
