@@ -7,6 +7,12 @@ struct clq_collection
 {
 	clq_list_t	*data;
 
+	int			(*insert)				(COLLECTION *src, void *element);						//INSERT - Add an item into the list ignoring duplicates
+	int			(*insert_distinct)		(COLLECTION *src, int TRANSFORM,  void *element);		//INSERT-DISTINCT - Add an item in the collection, checking for duplicates
+	int			(*delete)				(COLLECTION *src, FREE_FUNC);							//DELETE - Clears the entire collection
+	int			(*delete_where)			(COLLECTION *src, PREDICATE, FREE_FUNC);				//DELETE-WHERE - Delete all items that match the predicate
+	long		(*size)					(COLLECTION *src);										//SIZE - Returns the collection size
+
 	int			(*all)					(COLLECTION *src, PREDICATE);							//ALL - Predicate returns true or false for each item.
 	int			(*any)					(COLLECTION *src, PREDICATE);							//ANY - Predicate returns true of false for each item.
 	int			(*contains)				(COLLECTION *src, void *element, COMPARITOR);			//CONTAINS - Checks if object contains the specific element, with the given comparitor
