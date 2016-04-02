@@ -4,6 +4,21 @@
 #ifndef CLINQ_H
 #define CLINQ_H
 
+// TODO
+//Make it so that it only operates on a linked list. User doesn't care about structure
+
+// DATA MODIFICATION
+// ------------------------------------------------
+// INSERT - to add values
+// DELETE - Clear the entire entries
+// DELETE-WHERE - Clear the entries matching the predicate
+
+// EXTRA METHODS
+// -------------------------------------------------
+// COUNT - Return size of the list	** COULD BE DONE WITH A NULL PREDICATE **
+// COUNT-WHERE - Return the size of the list of the items matching the predicate.
+
+
 
 // ------------------
 // Easy Access Macros

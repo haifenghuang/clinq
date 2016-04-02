@@ -1,10 +1,9 @@
-// CLINQ
-// Contains definitions of all the CLINQ types supported
-
-#ifndef CLINQ_TYPES_H
-#define CLINQ_TYPES_H
+#ifndef CLINQ_COLLECTION_H
+#define CLINQ_COLLECTION_H
 
 #include <stdio.h>
+
+#include "list.h"
 
 #define COLLECTION		struct clinq_collection
 #define PREDICATE		int (*predicate)			(void *obj)
@@ -13,25 +12,18 @@
 #define EQ_COMPARITOR	int (*equality_comparitor)	(void *objA, void *objB)
 #define TRANSFORM			(*transform)			(void *obj)
 
-typedef enum clq_type
-{
-	CLQ_ARRAY,
-	CLQ_LIST,
-} clq_type;
-
 
 typedef struct clq_colleciton
 {
 	void		  *data;
-	clq_type	  type;
 
-	int			  (*all)				(COLLECTION *src, PREDICATE);							//ALL - Predicate returns true or false for each item.
-	int			  (*any)				(COLLECTION *src, PREDICATE);							//ANY - Predicate returns true of false for each item.
-	int			  (*contains)			(COLLECTION *src, void *element, COMPARITOR);			//CONTAINS - Checks if object contains the specific element, with the given comparitor
-	int			  (*count)				(COLLECTION *src, PREDICATE);							//COUNT - The number of items that match the given predicate
-	long		  (*sum)				(COLLECTION *src);										//SUM - NO PARAMS
-	long		  (*long_count)			(COLLECTION *src, PREDICATE);							//LONG-COUNT - The number of items that match the given predicate, as a long
-	float		  (*average)			(COLLECTION *src, int TRANSFORM);						//AVERAGE - Transform turns non-numerical types into a float value.
+	int(*all)				(COLLECTION *src, PREDICATE);							//ALL - Predicate returns true or false for each item.
+	int(*any)				(COLLECTION *src, PREDICATE);							//ANY - Predicate returns true of false for each item.
+	int(*contains)			(COLLECTION *src, void *element, COMPARITOR);			//CONTAINS - Checks if object contains the specific element, with the given comparitor
+	int(*count)				(COLLECTION *src, PREDICATE);							//COUNT - The number of items that match the given predicate
+	long(*sum)				(COLLECTION *src);										//SUM - NO PARAMS
+	long(*long_count)			(COLLECTION *src, PREDICATE);							//LONG-COUNT - The number of items that match the given predicate, as a long
+	float(*average)			(COLLECTION *src, int TRANSFORM);						//AVERAGE - Transform turns non-numerical types into a float value.
 	void		* (*element_at)			(COLLECTION *src, int index, void *default_value);		//ELEMENT-AT - Returns the element at the specified index, or defaul value if none-found
 	void		* (*first)				(COLLECTION *src, PREDICATE, void *default_value);		//FIRST - Gets the first element to match predicate, or default value is none match	
 	void		* (*last)				(COLLECTION *src, PREDICATE, void *default_value);		//LAST - Gets the last value to match the predicate, or default value if none match	
@@ -60,7 +52,7 @@ typedef struct clq_colleciton
 
 // FUNCS
 
-clq_collection_t *clq_collection_create(clq_type type);
+clq_collection_t *clq_collection_create();
 void clq_collection_destory(clq_collection_t *collection);
 
 
