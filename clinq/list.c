@@ -84,19 +84,13 @@ int clq_list_delete_free(clq_list_t *src, FREE_FUNC)
 { 
 	if (!src) { return 0; }
 
-	//clq_item_t *cursor = src->head;
+	for (int i = 0; i < src->size; i++)
+	{
+		free_func(src->data[i]);
+		src->data[i] = NULL;
+	}
 
-	//while (cursor)
-	//{
-	//	clq_item_t *temp = cursor;
-	//	cursor = cursor->next;
-	//
-	//	if (free_func) { free_func(temp->data); }
-	//	free(temp);
-	//	src->size--;
-	//}
-
-	//src->head = NULL;
+	src->size = 0;
 	return 1;
 }
 
@@ -104,32 +98,20 @@ int clq_list_delete_where(clq_list_t *src, PREDICATE, FREE_FUNC)
 {
 	if (!src) { return 0; }
 
-	//clq_item_t *cursor = src->head;
-	//clq_item_t *prev   = NULL;
-	//
-	//while (cursor)
-	//{
-	//	clq_item_t *temp = cursor;
-	//	prev = cursor;
-	//	cursor = cursor->next;
-	//
-	//	if (predicate(temp))
-	//	{
-	//		//Update list pointers
-	//		if (prev == src->head) { src->head = cursor; }
-	//		else { prev->next = cursor; }
-	//
-	//		//Free item
-	//		if (free_func) { free_func(temp->data); }
-	//		free(temp);
-	//		src->size--;
-	//	}
-	//}
+	int shift_val = 0;
 
-	//prev->next = NULL;
-
-	////Setting the head to NULL if there's nothing left in the data
-	//if (src->size == 0) { src->head = NULL; }
+	for (int i = 0; i < src->size; i++)
+	{
+		if (predicate(src->data[i]))
+		{
+			if (free_func) { free_func(src->data[i]); }
+			shift_val++;
+		}
+		
+		//Fill the holes in the array as we go, keeping it O(n)
+		else { src->data[i - shift_val] = src->data[i]; }
+	}
+	src->size -= shift_val;
 	return 1;
 }
 
