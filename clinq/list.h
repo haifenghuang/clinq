@@ -5,15 +5,25 @@
 
 #include "functions.h"
 
-typedef struct clq_list clq_list_t;
+typedef struct clq_list_item
+{
+	void *data;
+	struct clq_list_item *next;
+}clq_list_item_t;
+
+typedef struct clq_list
+{
+	struct clq_list_item *head;
+	long size;
+} clq_list_t;
 
 clq_list_t *clq_list_create();
 void clq_list_destory(clq_list_t *list);
 
-int clq_list_insert						(COLLECTION *src, void *element);
-int clq_list_insert_distinct			(COLLECTION *src, int TRANSFORM, void *element);
-int clq_list_delete						(COLLECTION *src, FREE_FUNC);
-int clq_list_delete_where				(COLLECTION *src, PREDICATE, FREE_FUNC);
-long clq_list_size						(COLLECTION *src);
+int clq_list_insert						(clq_list_t *src, void *element);
+int clq_list_insert_distinct			(clq_list_t *src, int TRANSFORM, void *element);
+int clq_list_delete						(clq_list_t *src, FREE_FUNC);
+int clq_list_delete_where				(clq_list_t *src, PREDICATE, FREE_FUNC);
+long clq_list_size						(clq_list_t *src);
 
 #endif

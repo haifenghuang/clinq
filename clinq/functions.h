@@ -1,7 +1,9 @@
 #ifndef CLINQ_FUNCTIONS_H
 #define CLINQ_FUNCTIONS_H
 
-#define COLLECTION		struct clinq_collection
+#include "collection.h"
+
+#define COLLECTION		struct clq_collection
 #define PREDICATE		int		(*predicate)			(void *obj)
 #define INDEX_PREDICATE int		(*predicate)			(void *obj, int index)
 #define COMPARITOR		int		(*comparitor)			(void *objA, void *objB)

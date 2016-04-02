@@ -2,12 +2,12 @@
 
 #include "linq_query.h"
 
-int			linq_count(COLLECTION *data, PREDICATE) { return 0; }
+int			linq_count(clq_list_t *data, PREDICATE) { return 0; }
 
 
-void		*linq_element_at(COLLECTION *src, int index, void *default_value) { return NULL; }
-void		*linq_first(COLLECTION *src, PREDICATE, void *default_value) { return NULL; }
-void		*linq_last(COLLECTION *src, PREDICATE, void *default_value) { return NULL; }
-void		*linq_single(COLLECTION *src, PREDICATE, void *default_value) { return NULL; }
+void		*linq_element_at(clq_list_t *src, int index, void *default_value) { return NULL; }
+void		*linq_first(clq_list_t *src, PREDICATE, void *default_value) { return NULL; }
+void		*linq_last(clq_list_t *src, PREDICATE, void *default_value) { return NULL; }
+void		*linq_single(clq_list_t *src, PREDICATE, void *default_value) { return NULL; }
 
-COLLECTION	*linq_where(COLLECTION *src, INDEX_PREDICATE) { return NULL; }
+COLLECTION	*linq_where(clq_list_t *src, INDEX_PREDICATE) { return NULL; }

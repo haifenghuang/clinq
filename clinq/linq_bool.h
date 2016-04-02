@@ -7,8 +7,8 @@
 #include "list.h"
 #include "functions.h"
 
-int linq_all		(COLLECTION *data, PREDICATE);
-int linq_any		(COLLECTION *data, PREDICATE);
-int linq_contains	(COLLECTION *data, void *element, COMPARITOR);
+int linq_all		(clq_list_t *data, PREDICATE);
+int linq_any		(clq_list_t *data, PREDICATE);
+int linq_contains	(clq_list_t *data, void *element, COMPARITOR);
 
 #endif

@@ -3,19 +3,6 @@
 
 #include "list.h"
 
-struct clq_list
-{
-	struct clq_list_item *head;
-	long size;
-};
-
-typedef struct clq_list_item
-{
-	void *data;
-	struct clq_list_item *next;
-}clq_list_item_t;
-
-
 clq_list_t *clq_list_create()
 {
 	clq_list_t *list = malloc(sizeof(clq_list_t));
@@ -44,10 +31,16 @@ void clq_list_destory(clq_list_t *list)
 }
 
 
+long clq_list_size(clq_list_t *src)
+{
+	if (!src) { return -1L; }
+	return src->size;
+}
+
 // TODO
 
-int clq_list_insert(COLLECTION *src, void *element) { return 0; }
-int clq_list_insert_distinct(COLLECTION *src, int TRANSFORM, void *element) { return 0; }
-int clq_list_delete(COLLECTION *src, FREE_FUNC) { return 0; }
-int clq_list_delete_where(COLLECTION *src, PREDICATE, FREE_FUNC) { return 0; }
-long clq_list_size(COLLECTION *src) { return 0L; }
+int clq_list_insert(clq_list_t *src, void *element) { return 0; }
+int clq_list_insert_distinct(clq_list_t *src, int TRANSFORM, void *element) { return 0; }
+int clq_list_delete(clq_list_t *src, FREE_FUNC) { return 0; }
+int clq_list_delete_where(clq_list_t *src, PREDICATE, FREE_FUNC) { return 0; }
+
