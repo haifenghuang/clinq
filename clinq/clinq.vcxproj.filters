@@ -2,15 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="clinq.h" />
-    <ClInclude Include="types.h">
-      <Filter>clinq</Filter>
-    </ClInclude>
-    <ClInclude Include="array.h">
-      <Filter>clinq</Filter>
-    </ClInclude>
     <ClInclude Include="list.h">
       <Filter>clinq</Filter>
     </ClInclude>
+    <ClInclude Include="collection.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="clinq">
@@ -18,9 +13,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="array.c" />
-    <ClCompile Include="list.c" />
     <ClCompile Include="clinq.c" />
-    <ClCompile Include="types.c" />
+    <ClCompile Include="collection.c" />
   </ItemGroup>
 </Project>

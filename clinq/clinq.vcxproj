@@ -73,16 +73,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="array.h" />
     <ClInclude Include="clinq.h" />
+    <ClInclude Include="collection.h" />
     <ClInclude Include="list.h" />
-    <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="array.c" />
     <ClCompile Include="clinq.c" />
-    <ClCompile Include="list.c" />
-    <ClCompile Include="types.c" />
+    <ClCompile Include="collection.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

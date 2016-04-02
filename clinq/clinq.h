@@ -4,6 +4,10 @@
 #ifndef CLINQ_H
 #define CLINQ_H
 
+#include "collection.h"
+
+typedef struct clq_colleciton clq_collection_t;
+
 // TODO
 //Make it so that it only operates on a linked list. User doesn't care about structure
 
