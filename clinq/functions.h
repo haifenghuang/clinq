@@ -1,8 +1,6 @@
 #ifndef CLINQ_FUNCTIONS_H
 #define CLINQ_FUNCTIONS_H
 
-#include "collection.h"
-
 #define COLLECTION		struct clq_collection
 #define PREDICATE		int		(*predicate)			(void *obj)
 #define INDEX_PREDICATE int		(*predicate)			(void *obj, int index)
