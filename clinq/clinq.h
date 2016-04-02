@@ -56,11 +56,17 @@
 #define CLQ_LAST(collection, predicate, default_value) \
 		(collection)->last(collection, predicate, default_value)
 
-#define CLQ_MAX(collection, transformation) \
-		(collection)->max(collection, transformation)
+#define CLQ_MAX_VALUE(collection, transformation) \
+		(collection)->max_value(collection, transformation)
 
-#define CLQ_MIN(collection, transformation) \
-		(collection)->min(collection, transformation)
+#define CLQ_MIN_VALUE(collection, transformation) \
+		(collection)->min_value(collection, transformation)
+
+#define CLQ_MAX_ELEMENT(collection, transformation) \
+		(collection)->max_element(collection, transformation)
+
+#define CLQ_MIN_ELEMENT(collection, transformation) \
+		(collection)->min_element(collection, transformation)
 
 #define CLQ_SINGLE(collection, predicate, default_value) \
 		(collection)->single(collection, predicate, default_value)

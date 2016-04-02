@@ -75,10 +75,15 @@
   <ItemGroup>
     <ClInclude Include="clinq.h" />
     <ClInclude Include="collection.h" />
+    <ClInclude Include="functions.h" />
+    <ClInclude Include="LINQ.h" />
+    <ClInclude Include="linq_bool.h" />
+    <ClInclude Include="linq_math.h" />
+    <ClInclude Include="linq_query.h" />
+    <ClInclude Include="linq_set.h" />
     <ClInclude Include="list.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="clinq.c" />
     <ClCompile Include="collection.c" />
     <ClCompile Include="list.c" />
   </ItemGroup>

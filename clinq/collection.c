@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "LINQ.h"
 #include "collection.h"
 
 struct clq_collection
@@ -17,20 +18,22 @@ struct clq_collection
 	int			(*any)					(COLLECTION *src, PREDICATE);							//ANY - Predicate returns true of false for each item.
 	int			(*contains)				(COLLECTION *src, void *element, COMPARITOR);			//CONTAINS - Checks if object contains the specific element, with the given comparitor
 	int			(*count)				(COLLECTION *src, PREDICATE);							//COUNT - The number of items that match the given predicate
-	long		(*sum)					(COLLECTION *src);										//SUM - NO PARAMS
+	int			(*max_value)			(COLLECTION *src, int TRANSFORM);						//MAX - Gets the max value after transforming each value in sequence
+	int			(*min_value)			(COLLECTION *src, int TRANSFORM);						//MIN - Gets the min value after transforming each value in sequence	
+	long		(*sum)					(COLLECTION *src, int TRANSFORM);						//SUM - Gets the total value of the items in the collection
 	long		(*long_count)			(COLLECTION *src, PREDICATE);							//LONG-COUNT - The number of items that match the given predicate, as a long
 	float		(*average)				(COLLECTION *src, int TRANSFORM);						//AVERAGE - Transform turns non-numerical types into a float value.
 	void		* (*element_at)			(COLLECTION *src, int index, void *default_value);		//ELEMENT-AT - Returns the element at the specified index, or defaul value if none-found
 	void		* (*first)				(COLLECTION *src, PREDICATE, void *default_value);		//FIRST - Gets the first element to match predicate, or default value is none match	
 	void		* (*last)				(COLLECTION *src, PREDICATE, void *default_value);		//LAST - Gets the last value to match the predicate, or default value if none match	
-	void		* (*max)				(COLLECTION *src, int TRANSFORM);						//MAX - Gets the max value after transforming each value in sequence
-	void		* (*min)				(COLLECTION *src, int TRANSFORM);						//MIN - Gets the min value after transforming each value in sequence	
+	void		* (*max_element)		(COLLECTION *src, int TRANSFORM);						//MAX-ELEMENT - Gets the element with the max value after transforming each value in sequence
+	void		* (*min_element)		(COLLECTION *src, int TRANSFORM);						//MIN-ELEMENT - Gets the element with the min value after transforming each value in sequence	
 	void		* (*single)				(COLLECTION *src, PREDICATE, void *default_value);		//SINGLE - Gets the only value to match the predicate, or default value if more than one match
 	COLLECTION	* (*concat)				(COLLECTION *src, COLLECTION *second);					//CONCAT - Joins 2 things together
 	COLLECTION	* (*default_if_empty)	(COLLECTION *src, void *default_value);					//DEFAULT-IF-EMPTY - Returns either the sequence or a new sequence containing the default value if empty
 	COLLECTION	* (*distinct)			(COLLECTION *src, EQ_COMPARITOR);						//DISTINCT - Returns the distinct elements in the sequence matching comparitor
-	COLLECTION	* (*except)				(COLLECTION *src, EQ_COMPARITOR);						//EXCEPT - Returns the set different using provided comparitor
-	COLLECTION	* (*set_intersect)		(COLLECTION *src, COLLECTION *second, COMPARITOR);		//INTERSET - Performs set interst section on both seqeunces
+	COLLECTION	* (*except)				(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR);	//EXCEPT - Returns the set different using provided comparitor
+	COLLECTION	* (*set_intersect)		(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR);	//INTERSET - Performs set interst section on both seqeunces
 	COLLECTION	* (*reverse)			(COLLECTION *src);										//REVERSE - Reverses the order of the elements in the underlying representation
 	COLLECTION	* (*skip)				(COLLECTION *src, int count);							//SKIP - Gets a sequence missing the first count values
 	COLLECTION	* (*skip_while)			(COLLECTION *src, PREDICATE);							//SKIP-WHILE - Gets a sequence missing the first number of items that match the predicate
