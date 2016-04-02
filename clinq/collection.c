@@ -1,6 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "collection.h"
 
-struct clq_colleciton
+struct clq_collection
 {
 	clq_list_t	*data;
 
@@ -35,7 +38,6 @@ struct clq_colleciton
 	//int			(*eqauls)			(COLLECTION *src, COLLECTION *another);					//EQUALS - Return true is the 2 
 
 };
-
 
 
 

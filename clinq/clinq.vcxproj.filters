@@ -15,5 +15,6 @@
   <ItemGroup>
     <ClCompile Include="clinq.c" />
     <ClCompile Include="collection.c" />
+    <ClCompile Include="list.c" />
   </ItemGroup>
 </Project>
