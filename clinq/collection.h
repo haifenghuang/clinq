@@ -10,7 +10,7 @@ typedef struct clq_collection
 
 	int(*insert)				(COLLECTION *src, void *element);						//INSERT - Add an item into the list ignoring duplicates
 	int(*insert_distinct)		(COLLECTION *src, EQ_COMPARITOR, void *element);		//INSERT-DISTINCT - Add an item in the collection, checking for duplicates
-	int(*delete)				(COLLECTION *src, FREE_FUNC);							//DELETE - Clears the entire collection
+	int(*clear)				(COLLECTION *src, FREE_FUNC);							//DELETE - Clears the entire collection
 	int(*delete_where)			(COLLECTION *src, PREDICATE, FREE_FUNC);				//DELETE-WHERE - Delete all items that match the predicate
 	int(*size)					(COLLECTION *src);										//SIZE - Returns the collection size
 

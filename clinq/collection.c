@@ -52,7 +52,7 @@ clq_collection_t *clq_create()
 	//Full out the functions of the collection
 	collection->insert = clq_collection_insert;
 	collection->insert_distinct = clq_collection_insert_distinct;
-	collection->delete = clq_collection_delete;
+	collection->clear = clq_collection_delete;
 	collection->delete_where = clq_collection_delete_where;
 	collection->size = clq_collection_size;
 
@@ -121,8 +121,8 @@ static int clq_collection_insert_distinct(COLLECTION *src, EQ_COMPARITOR,  void 
 static int clq_collection_delete( COLLECTION *src, FREE_FUNC)
 {
 	if (!src) { return 0; }
-	if (free_func) { return clq_list_delete_free(src->data, free_func); }
-	else { return clq_list_delete(src->data); }
+	if (free_func) { return clq_list_clear_free(src->data, free_func); }
+	else { return clq_list_clear(src->data); }
 }
 static int clq_collection_delete_where (COLLECTION *src, PREDICATE, FREE_FUNC)
 {

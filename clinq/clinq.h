@@ -17,7 +17,7 @@
 		(collection)->insert_distinct(collection, eq_comparitor, element)
 
 #define CLQ_DELETE(collection, free_func) \
-		(collection)->delete(collection, free_func)
+		(collection)->clear(collection, free_func)
 
 #define CLQ_DELETE_WHERE(collection, predicate, free_func) \
 		(collection)->delete_where(collection, predicate, free_func)

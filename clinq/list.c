@@ -9,18 +9,14 @@ clq_list_t *clq_list_create()
 	if (!list) { return NULL; }
 
 	//Init the array elements here...
-	list->data = malloc(sizeof(void *) * 2);
+	list->data = malloc(sizeof(void *) * DEFAULT_ARRAY_SIZE);
 	if (!list->data)
 	{
 		free(list);
 		return NULL;
 	}
 
-	//Init the sections to NULL
-	//list->data[0] = NULL;
-	//list->data[1] = NULL;
-
-	list->array_size = 2; //Default size
+	list->array_size = DEFAULT_ARRAY_SIZE;
 	list->size = 0L;
 
 	return list;
@@ -53,20 +49,18 @@ int clq_list_insert(clq_list_t *src, void *element)
 
 	if (src->size == src->array_size)
 	{
-		void **temp = realloc(src->data, sizeof(void *) * (src->array_size * 2));
+		void **temp = realloc(src->data, sizeof(void *) * (src->array_size * ARRAY_GROW_FACTOR));
 		if (!temp) { return 0; }
 
 		src->data = temp;
 		src->array_size *= 2;
-
-		printf("Reallocted to size: %d\n", src->array_size);
 	}
 
 	src->data[src->size++] = element;
 	return 1;
 }
 
-int clq_list_delete(clq_list_t *src)
+int clq_list_clear(clq_list_t *src)
 {
 	if (!src) { return 0; }
 
@@ -80,7 +74,7 @@ int clq_list_delete(clq_list_t *src)
 }
 
 
-int clq_list_delete_free(clq_list_t *src, FREE_FUNC)
+int clq_list_clear_free(clq_list_t *src, FREE_FUNC)
 { 
 	if (!src) { return 0; }
 
@@ -141,6 +135,3 @@ int clq_list_insert_distinct(clq_list_t *src, EQ_COMPARITOR, void *element)
 	src->data[src->size++] = element;
 	return 1;
 }
-
-
-
