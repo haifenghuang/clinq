@@ -7,7 +7,8 @@
 #include "list.h"
 #include "functions.h"
 
-int			linq_count			(clq_list_t *data, PREDICATE);
+int			linq_count			(clq_list_t *src, PREDICATE);
+long		linq_long_count		(clq_list_t *src, PREDICATE);
 
 void		*linq_element_at	(clq_list_t *src, int index, void *default_value);
 void		*linq_first			(clq_list_t *src, PREDICATE, void *default_value);

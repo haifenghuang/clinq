@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 #include "LINQ.h"
 #include "collection.h"
@@ -191,20 +192,20 @@ CLQ_COLLECTION *clq_linq_take_while(CLQ_COLLECTION *src, PREDICATE)
 }
 int	clq_linq_max(CLQ_COLLECTION *src, int TRANSFORM)
 {
-	if (!src) { return 0; }
+	if (!src) { return INT_MIN; }
 	return linq_max(src->data, transform);
 }
 int	clq_linq_min(CLQ_COLLECTION *src, int TRANSFORM)
 {
-	if (!src) { return 0; }
+	if (!src) { return INT_MAX; }
 	return linq_min(src->data, transform);
 }
-long	clq_linq_sum(CLQ_COLLECTION *src, int TRANSFORM)
+long clq_linq_sum(CLQ_COLLECTION *src, int TRANSFORM)
 {
 	if (!src) { return 0; }
 	return linq_sum(src->data, transform);
 }
-long	clq_linq_long_count(CLQ_COLLECTION *src, PREDICATE)
+long clq_linq_long_count(CLQ_COLLECTION *src, PREDICATE)
 {
 	if (!src) { return 0L; }
 	return linq_long_count(src->data, predicate);
@@ -214,12 +215,12 @@ float clq_linq_average(CLQ_COLLECTION *src, int TRANSFORM)
 	if (!src) { return -1.0; }
 	return linq_average(src->data, transform);
 }
-void	*clq_linq_max_element(CLQ_COLLECTION *src, int TRANSFORM)
+void *clq_linq_max_element(CLQ_COLLECTION *src, int TRANSFORM)
 {
 	if (!src) { return 0; }
 	return linq_max_element(src->data, transform);
 }
-void	*clq_linq_min_element(CLQ_COLLECTION *src, int TRANSFORM)
+void *clq_linq_min_element(CLQ_COLLECTION *src, int TRANSFORM)
 {
 	if (!src) { return 0; }
 	return linq_min_element(src->data, transform);
@@ -229,22 +230,22 @@ int	clq_linq_count(CLQ_COLLECTION *src, PREDICATE)
 	if (!src) { return 0; }
 	return linq_count(src->data, predicate);
 }
-void	*clq_linq_element_at(CLQ_COLLECTION *src, int index, void *default_value)
+void *clq_linq_element_at(CLQ_COLLECTION *src, int index, void *default_value)
 {
 	if (!src) { return 0; }
 	return linq_element_at(src->data, index, default_value);
 }
-void	*clq_linq_first(CLQ_COLLECTION *src, PREDICATE, void *default_value)
+void *clq_linq_first(CLQ_COLLECTION *src, PREDICATE, void *default_value)
 {
 	if (!src) { return 0; }
 	return linq_first(src->data, predicate, default_value);
 }
-void	*clq_linq_last(CLQ_COLLECTION *src, PREDICATE, void *default_value)
+void *clq_linq_last(CLQ_COLLECTION *src, PREDICATE, void *default_value)
 {
 	if (!src) { return 0; }
 	return linq_last(src->data, predicate, default_value);
 }
-void	*clq_linq_single(CLQ_COLLECTION *src, PREDICATE, void *default_value)
+void *clq_linq_single(CLQ_COLLECTION *src, PREDICATE, void *default_value)
 {
 	if (!src) { return 0; }
 	return linq_single(src->data, predicate, default_value);
