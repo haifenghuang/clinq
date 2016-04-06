@@ -109,9 +109,8 @@
 #define CLQ_WHERE(collection, predicate) \
 		clq_linq_where(collection, predicate)
 
-
-//Funcs
-COLLECTION *clq_create(void);
-void clq_destory(COLLECTION *collection);
+//FUNCTIONS
+CLQ_COLLECTION *clq_create(void);
+void clq_destory(CLQ_COLLECTION *collection);
 
 #endif

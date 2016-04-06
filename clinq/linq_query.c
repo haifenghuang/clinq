@@ -10,4 +10,4 @@ void		*linq_first(clq_list_t *src, PREDICATE, void *default_value) { return NULL
 void		*linq_last(clq_list_t *src, PREDICATE, void *default_value) { return NULL; }
 void		*linq_single(clq_list_t *src, PREDICATE, void *default_value) { return NULL; }
 
-COLLECTION	*linq_where(clq_list_t *src, INDEX_PREDICATE) { return NULL; }
+CLQ_COLLECTION	*linq_where(clq_list_t *src, INDEX_PREDICATE) { return NULL; }

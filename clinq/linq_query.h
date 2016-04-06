@@ -14,6 +14,6 @@ void		*linq_first			(clq_list_t *src, PREDICATE, void *default_value);
 void		*linq_last			(clq_list_t *src, PREDICATE, void *default_value);
 void		*linq_single		(clq_list_t *src, PREDICATE, void *default_value);
 
-COLLECTION	*linq_where			(clq_list_t *src, INDEX_PREDICATE);	
+CLQ_COLLECTION	*linq_where			(clq_list_t *src, INDEX_PREDICATE);	
 
 #endif
