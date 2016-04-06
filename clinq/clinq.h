@@ -34,8 +34,8 @@
 #define CLQ_ANY(collection, predicate) \
 		clq_linq_any(collection, predicate)
 
-#define CLQ_CONTAINS(collection, element, comparitor) \
-		clq_linq_contains(collection, element, comparitor)
+#define CLQ_CONTAINS(collection, element, eq_comparitor) \
+		clq_linq_contains(collection, element, eq_comparitor)
 
 #define CLQ_COUNT(collection, predicate) \
 		clq_linq_count(collection, predicate)
