@@ -66,9 +66,9 @@ CLQ_COLLECTION *linq_skip(clq_list_t *src, int count)
 	CLQ_COLLECTION *newCol = clq_create();
 	if (!newCol) { return NULL; }
 
-	for (int i = (count - 1); i < src->size; i++)
+	for (int i = count; i < src->size; i++)
 	{
-		if (!clq_collection_insert(src, src->data[i]))
+		if (!clq_collection_insert(newCol, src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -91,7 +91,7 @@ CLQ_COLLECTION *linq_skip_while(clq_list_t *src, PREDICATE)
 
 	for (int i = index; i < src->size; i++)
 	{
-		if (!clq_collection_insert(src, src->data[i]))
+		if (!clq_collection_insert(newCol, src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -110,7 +110,7 @@ CLQ_COLLECTION *linq_take(clq_list_t *src, int count)
 
 	for (int i = 0; i < itemCount; i++)
 	{
-		if (!clq_collection_insert(src, src->data[i]))
+		if (!clq_collection_insert(newCol, src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -129,7 +129,7 @@ CLQ_COLLECTION	*linq_take_while(clq_list_t *src, PREDICATE)
 	{
 		if (predicate(src->data[i]))
 		{
-			if (!clq_collection_insert(src, src->data[i]))
+			if (!clq_collection_insert(newCol, src->data[i]))
 			{
 				clq_destory(newCol);
 				return NULL;
