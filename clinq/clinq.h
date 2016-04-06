@@ -4,8 +4,7 @@
 #ifndef CLINQ_H
 #define CLINQ_H
 
-#include "collection.h"
-
+#include "functions.h"
 
 // ------------------
 // Data Manipulation Macros
@@ -112,7 +111,7 @@
 
 
 //Funcs
-clq_collection_t *clq_create(void);
-void clq_destory(clq_collection_t *collection);
+COLLECTION *clq_create(void);
+void clq_destory(COLLECTION *collection);
 
 #endif

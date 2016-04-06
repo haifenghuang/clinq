@@ -5,11 +5,6 @@
 #include "collection.h"
 
 
-
-
-
-// Function Implementations
-// ------------------------
 clq_collection_t *clq_create()
 {
 	clq_collection_t *collection = malloc(sizeof(clq_collection_t));
@@ -61,7 +56,6 @@ clq_collection_t *clq_create()
 	return collection;
 }
 
-
 void clq_destory(clq_collection_t *collection, FREE_FUNC)
 {
 	if (collection)
@@ -72,6 +66,7 @@ void clq_destory(clq_collection_t *collection, FREE_FUNC)
 		free(collection);
 	}
 }
+
 
 //Dispatchers for the LINQ functions
 //ALL ensuring the provided source isn't NULL 
