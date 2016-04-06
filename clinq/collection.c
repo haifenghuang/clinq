@@ -51,6 +51,7 @@ struct clq_collection
 	//CONCAT -> That frees the second collection, returning the first extented, rather than an entirely new collection.
 	//DEFAULT-IF-EMPTY -> Return the existing collection, not a newly created one.
 	//REVERSE -> Return a new collection revsered?
+	//SKIP-WHILE -> Continue to add items that match the predicate?
 	
 	//ITERATORS
 	//DESTORY -> Takes a free function
