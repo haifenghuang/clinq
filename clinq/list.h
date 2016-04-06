@@ -17,7 +17,7 @@ typedef struct clq_list
 } clq_list_t;
 
 clq_list_t *clq_list_create();
-void clq_list_destory(clq_list_t *list);
+void clq_list_destory(clq_list_t *list, FREE_FUNC);
 
 int clq_list_insert				(clq_list_t *src, void *element);
 int clq_list_insert_distinct	(clq_list_t *src, EQ_COMPARITOR, void *element);

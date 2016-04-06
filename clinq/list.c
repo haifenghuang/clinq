@@ -23,13 +23,16 @@ clq_list_t *clq_list_create()
 }
 
 
-void clq_list_destory(clq_list_t *list)
+void clq_list_destory(clq_list_t *list, FREE_FUNC)
 {
 	if (list)
 	{
-		for (int i = 0; i < list->size; i++)
+		if (free_func)
 		{
-			free(list->data[i]);
+			for (int i = 0; i < list->size; i++)
+			{
+				ifree(list->data[i]);
+			}
 		}
 
 		free(list->data);

@@ -94,13 +94,13 @@ clq_collection_t *clq_create()
 }
 
 
-void clq_destory(clq_collection_t *collection)
+void clq_destory(clq_collection_t *collection, FREE_FUNC)
 {
 	if (collection)
 	{
 		//Free the other sections here....
 
-		clq_list_destory(collection->data);
+		clq_list_destory(collection->data, free_func);
 		free(collection);
 	}
 }
