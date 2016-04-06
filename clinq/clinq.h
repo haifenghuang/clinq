@@ -40,8 +40,8 @@
 #define CLQ_COUNT(collection, predicate) \
 		clq_linq_count(collection, predicate)
 
-#define CLQ_SUM(collection) \
-		clq_linq_sum(collection)
+#define CLQ_SUM(collection, transformation) \
+		clq_linq_sum(collection, transformation)
 
 #define CLQ_LONG_COUNT(collection, predicate) \
 		clq_linq_long_count(collection, predicate)
