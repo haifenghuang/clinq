@@ -31,7 +31,7 @@ void clq_list_destory(clq_list_t *list, FREE_FUNC)
 		{
 			for (int i = 0; i < list->size; i++)
 			{
-				ifree(list->data[i]);
+				free(list->data[i]);
 			}
 		}
 

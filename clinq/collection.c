@@ -4,40 +4,8 @@
 #include "LINQ.h"
 #include "collection.h"
 
-//Function Declarations
-//----------------------
-static int clq_collection_insert(COLLECTION *src, void *element);
-static int clq_collection_insert_distinct(COLLECTION *src, EQ_COMPARITOR, void *element);
-static int clq_collection_delete(COLLECTION *src, FREE_FUNC);
-static int clq_collection_delete_where(COLLECTION *src, PREDICATE, FREE_FUNC);
-static int clq_collection_size(COLLECTION *src);
-static int clq_linq_all(COLLECTION *src, PREDICATE);
-static int clq_linq_any(COLLECTION *src, PREDICATE);
-static int clq_linq_contains(COLLECTION *src, void *element, COMPARITOR);
-static COLLECTION *clq_linq_concat(COLLECTION *src, COLLECTION *second);
-static COLLECTION *clq_linq_default_if_empty(COLLECTION *src, void *default_value);
-static COLLECTION *clq_linq_reverse(COLLECTION *src);
-static COLLECTION *clq_linq_skip(COLLECTION *src, int count);
-static COLLECTION *clq_linq_skip_while(COLLECTION *src, PREDICATE);
-static COLLECTION *clq_linq_take(COLLECTION *src, int count);
-static COLLECTION *clq_linq_take_while(COLLECTION *src, PREDICATE);
-static int	clq_linq_max(COLLECTION *src, int TRANSFORM);
-static int	clq_linq_min(COLLECTION *src, int TRANSFORM);
-static long	clq_linq_sum(COLLECTION *src, int TRANSFORM);
-static long	clq_linq_long_count(COLLECTION *src, PREDICATE);
-static float clq_linq_average(COLLECTION *src, int TRANSFORM);
-static void	*clq_linq_max_element(COLLECTION *src, int TRANSFORM);
-static void	*clq_linq_min_element(COLLECTION *src, int TRANSFORM);
-static int	clq_linq_count(COLLECTION *src, PREDICATE);
-static void	*clq_linq_element_at(COLLECTION *src, int index, void *default_value);
-static void	*clq_linq_first(COLLECTION *src, PREDICATE, void *default_value);
-static void	*clq_linq_last(COLLECTION *src, PREDICATE, void *default_value);
-static void	*clq_linq_single(COLLECTION *src, PREDICATE, void *default_value);
-static COLLECTION *clq_linq_where(COLLECTION *src, INDEX_PREDICATE);
-static COLLECTION *clq_linq_distinct(COLLECTION *src, EQ_COMPARITOR);
-static COLLECTION *clq_linq_except(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR);
-static COLLECTION *clq_linq_intersect(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR);
-static COLLECTION *clq_linq_union(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR);
+
+
 
 
 // Function Implementations
@@ -108,164 +76,164 @@ void clq_destory(clq_collection_t *collection, FREE_FUNC)
 //Dispatchers for the LINQ functions
 //ALL ensuring the provided source isn't NULL 
 // --------------------------------------------------------------------------------
-static int clq_collection_insert(COLLECTION *src, void *element) 
+int clq_collection_insert(COLLECTION *src, void *element) 
 {
 	if (!src) { return 0; }
 	return clq_list_insert(src->data, element);
 }	
-static int clq_collection_insert_distinct(COLLECTION *src, EQ_COMPARITOR,  void *element)
+int clq_collection_insert_distinct(COLLECTION *src, EQ_COMPARITOR,  void *element)
 {
 	if (!src) { return 0; }
 	return clq_list_insert_distinct(src->data, equality_comparitor, element);
 }
-static int clq_collection_delete( COLLECTION *src, FREE_FUNC)
+int clq_collection_delete( COLLECTION *src, FREE_FUNC)
 {
 	if (!src) { return 0; }
 	if (free_func) { return clq_list_clear_free(src->data, free_func); }
 	else { return clq_list_clear(src->data); }
 }
-static int clq_collection_delete_where (COLLECTION *src, PREDICATE, FREE_FUNC)
+int clq_collection_delete_where (COLLECTION *src, PREDICATE, FREE_FUNC)
 {
 	if (!src) { return 0; }
 	return clq_list_delete_where(src->data, predicate, free_func);
 }
-static int clq_collection_size (COLLECTION *src)
+int clq_collection_size (COLLECTION *src)
 {
 	if (!src) { return -1L; }
 	return clq_list_size(src->data);
 }
-static int clq_linq_all(COLLECTION *src, PREDICATE)
+int clq_linq_all(COLLECTION *src, PREDICATE)
 {
 	if (!src) { return 0; }
 	return linq_all(src->data, predicate);
 }
-static int clq_linq_any(COLLECTION *src, PREDICATE)
+int clq_linq_any(COLLECTION *src, PREDICATE)
 {
 	if (!src) { return 0; }
 	return linq_any(src->data, predicate);
 }
-static int clq_linq_contains(COLLECTION *src, void *element, COMPARITOR)
+int clq_linq_contains(COLLECTION *src, void *element, COMPARITOR)
 {
 	if (!src) { return 0; }
 	return linq_contains(src->data, element, comparitor);
 }
-static COLLECTION *clq_linq_concat(COLLECTION *src, COLLECTION *second)
+COLLECTION *clq_linq_concat(COLLECTION *src, COLLECTION *second)
 {
 	if (!src) { return NULL; }
 	return linq_concat(src->data, second->data);
 }
-static COLLECTION *clq_linq_default_if_empty(COLLECTION *src, void *default_value)
+COLLECTION *clq_linq_default_if_empty(COLLECTION *src, void *default_value)
 {
 	if (!src) { return NULL; }
 	return linq_default_if_empty(src->data, default_value);
 }
-static COLLECTION *clq_linq_reverse(COLLECTION *src)
+COLLECTION *clq_linq_reverse(COLLECTION *src)
 {
 	if (!src) { return NULL; }
 	return linq_reverse(src->data);
 }
-static COLLECTION *clq_linq_skip(COLLECTION *src, int count)
+COLLECTION *clq_linq_skip(COLLECTION *src, int count)
 {
 	if (!src) { return NULL; }
 	return linq_skip(src->data, count);
 }
-static COLLECTION *clq_linq_skip_while(COLLECTION *src, PREDICATE)
+COLLECTION *clq_linq_skip_while(COLLECTION *src, PREDICATE)
 {
 	if (!src) { return NULL; }
 	return linq_skip_while(src->data, predicate);
 }
-static COLLECTION *clq_linq_take(COLLECTION *src, int count)
+COLLECTION *clq_linq_take(COLLECTION *src, int count)
 {
 	if (!src) { return NULL; }
 	return linq_take(src->data, count);
 }
-static COLLECTION *clq_linq_take_while(COLLECTION *src, PREDICATE)
+COLLECTION *clq_linq_take_while(COLLECTION *src, PREDICATE)
 {
 	if (!src) { return NULL; }
 	return linq_take_while(src->data, predicate);
 }
-static int	clq_linq_max(COLLECTION *src, int TRANSFORM)
+int	clq_linq_max(COLLECTION *src, int TRANSFORM)
 {
 	if (!src) { return 0; }
 	return linq_max(src->data, transform);
 }
-static int	clq_linq_min(COLLECTION *src, int TRANSFORM)
+int	clq_linq_min(COLLECTION *src, int TRANSFORM)
 {
 	if (!src) { return 0; }
 	return linq_min(src->data, transform);
 }
-static long	clq_linq_sum(COLLECTION *src, int TRANSFORM)
+long	clq_linq_sum(COLLECTION *src, int TRANSFORM)
 {
 	if (!src) { return 0; }
 	return linq_sum(src->data, transform);
 }
-static long	clq_linq_long_count(COLLECTION *src, PREDICATE)
+long	clq_linq_long_count(COLLECTION *src, PREDICATE)
 {
 	if (!src) { return 0L; }
 	return linq_long_count(src->data, predicate);
 }
-static float clq_linq_average(COLLECTION *src, int TRANSFORM)
+float clq_linq_average(COLLECTION *src, int TRANSFORM)
 {
 	if (!src) { return -1.0; }
 	return linq_average(src->data, transform);
 }
-static void	*clq_linq_max_element(COLLECTION *src, int TRANSFORM)
+void	*clq_linq_max_element(COLLECTION *src, int TRANSFORM)
 {
 	if (!src) { return 0; }
 	return linq_max_element(src->data, transform);
 }
-static void	*clq_linq_min_element(COLLECTION *src, int TRANSFORM)
+void	*clq_linq_min_element(COLLECTION *src, int TRANSFORM)
 {
 	if (!src) { return 0; }
 	return linq_min_element(src->data, transform);
 }
-static int	clq_linq_count(COLLECTION *src, PREDICATE)
+int	clq_linq_count(COLLECTION *src, PREDICATE)
 {
 	if (!src) { return 0; }
 	return linq_count(src->data, predicate);
 }
-static void	*clq_linq_element_at(COLLECTION *src, int index, void *default_value)
+void	*clq_linq_element_at(COLLECTION *src, int index, void *default_value)
 {
 	if (!src) { return 0; }
 	return linq_element_at(src->data, index, default_value);
 }
-static void	*clq_linq_first(COLLECTION *src, PREDICATE, void *default_value)
+void	*clq_linq_first(COLLECTION *src, PREDICATE, void *default_value)
 {
 	if (!src) { return 0; }
 	return linq_first(src->data, predicate, default_value);
 }
-static void	*clq_linq_last(COLLECTION *src, PREDICATE, void *default_value)
+void	*clq_linq_last(COLLECTION *src, PREDICATE, void *default_value)
 {
 	if (!src) { return 0; }
 	return linq_last(src->data, predicate, default_value);
 }
-static void	*clq_linq_single(COLLECTION *src, PREDICATE, void *default_value)
+void	*clq_linq_single(COLLECTION *src, PREDICATE, void *default_value)
 {
 	if (!src) { return 0; }
 	return linq_single(src->data, predicate, default_value);
 }
-static COLLECTION *clq_linq_where(COLLECTION *src, INDEX_PREDICATE)
+COLLECTION *clq_linq_where(COLLECTION *src, INDEX_PREDICATE)
 {
 	if (!src) { return NULL; }
 	return linq_where(src->data, predicate);
 }
-static COLLECTION *clq_linq_distinct(COLLECTION *src, EQ_COMPARITOR)
+COLLECTION *clq_linq_distinct(COLLECTION *src, EQ_COMPARITOR)
 {
 	if (!src) { return NULL; }
 	return linq_distinct(src->data, equality_comparitor);
 }
-static COLLECTION *clq_linq_except(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR)
+COLLECTION *clq_linq_except(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR)
 {
 	if (!src) { return NULL; }
 	return linq_except(src->data, second->data, equality_comparitor);
 
 }
-static COLLECTION *clq_linq_intersect(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR)
+COLLECTION *clq_linq_intersect(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR)
 {
 	if (!src) { return NULL; }
 	return linq_intersect(src->data, second->data, equality_comparitor);
 }
-static COLLECTION *clq_linq_union(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR)
+COLLECTION *clq_linq_union(COLLECTION *src, COLLECTION *second, EQ_COMPARITOR)
 {
 	if (!src) { return NULL; }
 	return linq_union(src->data, second->data, equality_comparitor);
