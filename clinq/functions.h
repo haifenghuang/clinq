@@ -44,4 +44,8 @@ CLQ_COLLECTION	*clq_linq_except(CLQ_COLLECTION *src, CLQ_COLLECTION *second, EQ_
 CLQ_COLLECTION	*clq_linq_intersect(CLQ_COLLECTION *src, CLQ_COLLECTION *second, EQ_COMPARITOR);
 CLQ_COLLECTION	*clq_linq_union(CLQ_COLLECTION *src, CLQ_COLLECTION *second, EQ_COMPARITOR);
 
+//FUNCTIONS
+CLQ_COLLECTION *clq_create(void);
+void clq_destory(CLQ_COLLECTION *collection);
+
 #endif

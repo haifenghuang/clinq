@@ -46,6 +46,14 @@ struct clq_collection
 	//MAYBE
 	//CLQ_COLLECTION	(*cast)				(CLQ_COLLECTION *src, clinq_type dest);							//CAST - Transforms the underlying representation from one type to another.
 	//int				(*eqauls)			(CLQ_COLLECTION *src, CLQ_COLLECTION *another);					//EQUALS - Return true is the 2 
+
+	//TODO - EXTRAS
+	//CONCAT -> That frees the second collection, returning the first extented, rather than an entirely new collection.
+	//DEFAULT-IF-EMPTY -> Return the existing collection, not a newly created one.
+	//REVERSE -> Return a new collection revsered?
+	
+	//ITERATORS
+	//DESTORY -> Takes a free function
 };
 
 clq_collection_t *clq_create()
@@ -99,13 +107,12 @@ clq_collection_t *clq_create()
 	return collection;
 }
 
-void clq_destory(clq_collection_t *collection, FREE_FUNC)
+void clq_destory(clq_collection_t *collection)
 {
 	if (collection)
 	{
 		//Free the other sections here....
-
-		clq_list_destory(collection->data, free_func);
+		clq_list_destory(collection->data, NULL);
 		free(collection);
 	}
 }
@@ -157,7 +164,7 @@ int clq_linq_contains(CLQ_COLLECTION *src, void *element, EQ_COMPARITOR)
 }
 CLQ_COLLECTION *clq_linq_concat(CLQ_COLLECTION *src, CLQ_COLLECTION *second)
 {
-	if (!src) { return NULL; }
+	if (!src || !second) { return NULL; }
 	return linq_concat(src->data, second->data);
 }
 CLQ_COLLECTION *clq_linq_default_if_empty(CLQ_COLLECTION *src, void *default_value)
