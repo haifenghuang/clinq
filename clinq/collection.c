@@ -55,6 +55,7 @@ struct clq_collection
 	
 	//ITERATORS
 	//DESTORY -> Takes a free function
+	//DO WE ACTUALLY NEED THE FUNCTION POINTERS?
 };
 
 clq_collection_t *clq_create()
