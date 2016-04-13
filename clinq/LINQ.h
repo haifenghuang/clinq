@@ -8,3 +8,5 @@
 #include "linq_query.h"
 
 #endif
+
+//TODO - Fix the function decs for all LINQ methods to accept a darray_t *

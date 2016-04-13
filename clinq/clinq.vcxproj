@@ -74,7 +74,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="clinq.h" />
-    <ClInclude Include="collection.h" />
+    <ClInclude Include="darray.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="LINQ.h" />
     <ClInclude Include="linq_bool.h" />
@@ -82,16 +82,11 @@
     <ClInclude Include="linq_math.h" />
     <ClInclude Include="linq_query.h" />
     <ClInclude Include="linq_set.h" />
-    <ClInclude Include="list.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="collection.c" />
-    <ClCompile Include="linq_bool.c" />
-    <ClCompile Include="linq_data.c" />
-    <ClCompile Include="linq_math.c" />
-    <ClCompile Include="linq_query.c" />
-    <ClCompile Include="linq_set.c" />
-    <ClCompile Include="list.c" />
+    <ClCompile Include="darray.c" />
+    <ClCompile Include="darray_dispatcher.c" />
+    <ClCompile Include="linq.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

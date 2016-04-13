@@ -4,16 +4,16 @@
 #ifndef CLINQ_LINQ_MATH_H
 #define CLINQ_LINQ_MATH_H
 
-#include "list.h"
+#include "darray.h"
 #include "functions.h"
 
-int		linq_max			(clq_list_t *data, int TRANSFORM);
-int		linq_min			(clq_list_t *data, int TRANSFORM);
+int		linq_max			(darray_t *data, int TRANSFORM);
+int		linq_min			(darray_t *data, int TRANSFORM);
 
-long	linq_sum			(clq_list_t *data, int TRANSFORM);
-float	linq_average		(clq_list_t *data, int TRANSFORM);
+long	linq_sum			(darray_t *data, int TRANSFORM);
+float	linq_average		(darray_t *data, int TRANSFORM);
 
-void	*linq_max_element	(clq_list_t *data, int TRANSFORM);
-void	*linq_min_element	(clq_list_t *data, int TRANSFORM);
+void	*linq_max_element	(darray_t *data, int TRANSFORM);
+void	*linq_min_element	(darray_t *data, int TRANSFORM);
 
 #endif
