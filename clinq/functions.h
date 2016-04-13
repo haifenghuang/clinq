@@ -1,7 +1,7 @@
 #ifndef CLINQ_FUNCTIONS_H
 #define CLINQ_FUNCTIONS_H
 
-#define CLQ_COLLECTION		struct clq_collection
+#define CLQ_COLLECTION	void
 #define PREDICATE		int		(*predicate)			(void *obj)
 #define INDEX_PREDICATE int		(*predicate)			(void *obj, int index)
 #define COMPARITOR		int		(*comparitor)			(void *objA, void *objB)
@@ -15,7 +15,7 @@ int				clq_collection_insert(CLQ_COLLECTION *src, void *element);
 int				clq_collection_insert_distinct(CLQ_COLLECTION *src, EQ_COMPARITOR, void *element);
 int				clq_collection_delete(CLQ_COLLECTION *src, FREE_FUNC);
 int				clq_collection_delete_where(CLQ_COLLECTION *src, PREDICATE, FREE_FUNC);
-int				clq_collection_size(CLQ_COLLECTION *src);
+long			clq_collection_size(CLQ_COLLECTION *src);
 int				clq_linq_all(CLQ_COLLECTION *src, PREDICATE);
 int				clq_linq_any(CLQ_COLLECTION *src, PREDICATE);
 int				clq_linq_contains(CLQ_COLLECTION *src, void *element, COMPARITOR);
@@ -43,9 +43,5 @@ CLQ_COLLECTION	*clq_linq_distinct(CLQ_COLLECTION *src, EQ_COMPARITOR);
 CLQ_COLLECTION	*clq_linq_except(CLQ_COLLECTION *src, CLQ_COLLECTION *second, EQ_COMPARITOR);
 CLQ_COLLECTION	*clq_linq_intersect(CLQ_COLLECTION *src, CLQ_COLLECTION *second, EQ_COMPARITOR);
 CLQ_COLLECTION	*clq_linq_union(CLQ_COLLECTION *src, CLQ_COLLECTION *second, EQ_COMPARITOR);
-
-//FUNCTIONS
-CLQ_COLLECTION *clq_create(void);
-void clq_destory(CLQ_COLLECTION *collection);
 
 #endif

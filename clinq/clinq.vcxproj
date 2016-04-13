@@ -75,6 +75,7 @@
   <ItemGroup>
     <ClInclude Include="clinq.h" />
     <ClInclude Include="collection.h" />
+    <ClInclude Include="darray.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="LINQ.h" />
     <ClInclude Include="linq_bool.h" />
@@ -86,6 +87,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="collection.c" />
+    <ClCompile Include="darray.c" />
+    <ClCompile Include="darray_dispatcher.c" />
     <ClCompile Include="linq_bool.c" />
     <ClCompile Include="linq_data.c" />
     <ClCompile Include="linq_math.c" />

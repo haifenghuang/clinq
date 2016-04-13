@@ -29,6 +29,7 @@
     <ClInclude Include="linq_data.h">
       <Filter>LINQ\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="darray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="list.c">
@@ -52,6 +53,8 @@
     <ClCompile Include="linq_data.c">
       <Filter>LINQ\Impl</Filter>
     </ClCompile>
+    <ClCompile Include="darray.c" />
+    <ClCompile Include="darray_dispatcher.c" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collection">
