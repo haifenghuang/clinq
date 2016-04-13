@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clinq", "clinq\clinq.vcxproj", "{CF3FED1E-4E00-4704-959E-789FE136D360}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clinq", "clinq.vcxproj", "{CF3FED1E-4E00-4704-959E-789FE136D360}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clinq-test", "clinq-test\clinq-test.vcxproj", "{70B18BDB-6E2A-4EB6-9FFA-DEBE8913103E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clinq-test", "clinq-test.vcxproj", "{70B18BDB-6E2A-4EB6-9FFA-DEBE8913103E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CF3FED1E-4E00-4704-959E-789FE136D360} = {CF3FED1E-4E00-4704-959E-789FE136D360}
 	EndProjectSection
