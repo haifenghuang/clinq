@@ -5,46 +5,58 @@
 #include "functions.h"
 #include "darray.h"
 
+CLQ_COLLECTION *clq_create()
+{
+	return (CLQ_COLLECTION *)darray_create();
+}
 
-int clq_collection_insert(CLQ_COLLECTION *src, void *element)
+void clq_destory(CLQ_COLLECTION *src)
+{
+	darray_t *arr = (darray_t *)src;
+	
+	if (arr) { darray_destory(arr); }
+}
+
+
+
+int clq_insert(CLQ_COLLECTION *src, void *element)
 {
 	darray_t *arr = (darray_t *)src;
 	if (!arr) { return 0; }
 
-	return clq_list_insert(arr, element);
+	return darray_insert(arr, element);
 }
 
-int clq_collection_insert_distinct(CLQ_COLLECTION *src, EQ_COMPARITOR, void *element)
+int clq_insert_distinct(CLQ_COLLECTION *src, EQ_COMPARITOR, void *element)
 {
 	darray_t *arr = (darray_t *)src;
 	if (!arr) { return 0; }
 
-	return clq_list_insert_distinct(arr, equality_comparitor, element);
+	return darray_insert_distinct(arr, element, equality_comparitor);
 }
 
-int clq_collection_delete(CLQ_COLLECTION *src, FREE_FUNC)
+int clq_delete(CLQ_COLLECTION *src, FREE_FUNC)
 {
 	darray_t *arr = (darray_t *)src;
 	if (!arr) { return 0; }
 
-	if (free_func) { return clq_list_clear_free(arr, free_func); }
-	else { return clq_list_clear(arr); }
+	return darray_clear(arr, free_func);
 }
 
-int clq_collection_delete_where(CLQ_COLLECTION *src, PREDICATE, FREE_FUNC)
+int clq_delete_where(CLQ_COLLECTION *src, PREDICATE, FREE_FUNC)
 {
 	darray_t *arr = (darray_t *)src;
 	if (!arr) { return 0; }
 
-	return clq_list_delete_where(arr, predicate, free_func);
+	return darray_delete_where(arr, predicate, free_func);
 }
 
-long clq_collection_size(CLQ_COLLECTION *src)
+long clq_size(CLQ_COLLECTION *src)
 {
 	darray_t *arr = (darray_t *)src;
 	if (!arr) { return -1; }
 
-	return clq_list_size(arr);
+	return arr->size;
 }
 
 int clq_linq_all(CLQ_COLLECTION *src, PREDICATE)

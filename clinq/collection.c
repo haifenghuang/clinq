@@ -58,7 +58,7 @@ struct clq_collection
 	//DO WE ACTUALLY NEED THE FUNCTION POINTERS?
 };
 
-clq_collection_t *clq_create()
+clq_collection_t *clq_create_OLD()
 {
 	clq_collection_t *collection = malloc(sizeof(clq_collection_t));
 	if (!collection) { return NULL; }
@@ -66,11 +66,11 @@ clq_collection_t *clq_create()
 	 collection->data = clq_list_create();
 
 	//Full out the functions of the collection
-	collection->insert = clq_collection_insert;
-	collection->insert_distinct = clq_collection_insert_distinct;
-	collection->clear = clq_collection_delete;
-	collection->delete_where = clq_collection_delete_where;
-	collection->size = clq_collection_size;
+	collection->insert = clq_insert;
+	collection->insert_distinct = clq_insert_distinct;
+	collection->clear = clq_delete;
+	collection->delete_where = clq_delete_where;
+	collection->size = clq_size;
 
 	collection->all = clq_linq_all;
 	collection->any = clq_linq_any;

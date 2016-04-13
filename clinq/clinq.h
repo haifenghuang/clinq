@@ -7,22 +7,31 @@
 #include "functions.h"
 
 // ------------------
+// Init Macros
+// -------------------
+#define CLQ_CREATE \
+		clq_create()
+
+#define CLQ_DESTORY(collection) \
+		clq_destory(collection)
+
+// ------------------
 // Data Manipulation Macros
 // ------------------
 #define CLQ_INSERT(collection, element) \
-		clq_collection_insert(collection, element)
+		clq_insert(collection, element)
 
 #define CLQ_INSERT_DISTINCT(collection, eq_comparitor, element) \
-		clq_collection_insert_distinct(collection, eq_comparitor, element)
+		clq_insert_distinct(collection, eq_comparitor, element)
 
 #define CLQ_DELETE(collection, free_func) \
-		clq_collection_delete(collection, free_func)
+		clq_delete(collection, free_func)
 
 #define CLQ_DELETE_WHERE(collection, predicate, free_func) \
-		clq_collection_delete_where(collection, predicate, free_func)
+		clq_delete_where(collection, predicate, free_func)
 
 #define CLQ_SIZE(collection) \
-		clq_collection_size(collection)
+		clq_size(collection)
 
 // ------------------
 // Easy Access Macros

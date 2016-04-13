@@ -11,11 +11,14 @@
 
 //Function Declarations
 //----------------------
-int				clq_collection_insert(CLQ_COLLECTION *src, void *element);
-int				clq_collection_insert_distinct(CLQ_COLLECTION *src, EQ_COMPARITOR, void *element);
-int				clq_collection_delete(CLQ_COLLECTION *src, FREE_FUNC);
-int				clq_collection_delete_where(CLQ_COLLECTION *src, PREDICATE, FREE_FUNC);
-long			clq_collection_size(CLQ_COLLECTION *src);
+CLQ_COLLECTION  *clq_create(void);
+void			clq_destory(CLQ_COLLECTION *src);
+
+int				clq_insert(CLQ_COLLECTION *src, void *element);
+int				clq_insert_distinct(CLQ_COLLECTION *src, EQ_COMPARITOR, void *element);
+int				clq_delete(CLQ_COLLECTION *src, FREE_FUNC);
+int				clq_delete_where(CLQ_COLLECTION *src, PREDICATE, FREE_FUNC);
+long			clq_size(CLQ_COLLECTION *src);
 int				clq_linq_all(CLQ_COLLECTION *src, PREDICATE);
 int				clq_linq_any(CLQ_COLLECTION *src, PREDICATE);
 int				clq_linq_contains(CLQ_COLLECTION *src, void *element, COMPARITOR);

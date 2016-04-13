@@ -42,7 +42,7 @@ CLQ_COLLECTION *linq_concat(darray_t *src, darray_t *second)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		if (!clq_collection_insert(newCol, src->data[i]))
+		if (!clq_insert(newCol, src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -51,7 +51,7 @@ CLQ_COLLECTION *linq_concat(darray_t *src, darray_t *second)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		if (!clq_collection_insert(newCol, second->data[i]))
+		if (!clq_insert(newCol, second->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -65,12 +65,12 @@ CLQ_COLLECTION	*linq_default_if_empty(darray_t *src, void *default_value)
 {
 	CLQ_COLLECTION *newCol = NULL;
 
-	if (clq_collection_size(src) == 0)
+	if (clq_size(src) == 0)
 	{
 		newCol = clq_create();
 		if (!newCol) { return NULL; }
 
-		if (!clq_collection_insert(newCol, default_value))
+		if (!clq_insert(newCol, default_value))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -100,7 +100,7 @@ CLQ_COLLECTION *linq_skip(darray_t *src, int count)
 
 	for (int i = count; i < src->size; i++)
 	{
-		if (!clq_collection_insert(newCol, src->data[i]))
+		if (!clq_insert(newCol, src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -123,7 +123,7 @@ CLQ_COLLECTION *linq_skip_while(darray_t *src, PREDICATE)
 
 	for (int i = index; i < src->size; i++)
 	{
-		if (!clq_collection_insert(newCol, src->data[i]))
+		if (!clq_insert(newCol, src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -142,7 +142,7 @@ CLQ_COLLECTION *linq_take(darray_t *src, int count)
 
 	for (int i = 0; i < itemCount; i++)
 	{
-		if (!clq_collection_insert(newCol, src->data[i]))
+		if (!clq_insert(newCol, src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -161,7 +161,7 @@ CLQ_COLLECTION	*linq_take_while(darray_t *src, PREDICATE)
 	{
 		if (predicate(src->data[i]))
 		{
-			if (!clq_collection_insert(newCol, src->data[i]))
+			if (!clq_insert(newCol, src->data[i]))
 			{
 				clq_destory(newCol);
 				return NULL;
@@ -340,7 +340,7 @@ CLQ_COLLECTION *linq_where(darray_t *src, INDEX_PREDICATE)
 	{
 		if (predicate(src->data[i], i))
 		{
-			if (!clq_collection_insert(newCol, src->data[i]))
+			if (!clq_insert(newCol, src->data[i]))
 			{
 				clq_destory(newCol);
 				return NULL;
