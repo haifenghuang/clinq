@@ -101,20 +101,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="clinq.h" />
-    <ClInclude Include="darray.h" />
-    <ClInclude Include="functions.h" />
-    <ClInclude Include="LINQ.h" />
-    <ClInclude Include="linq_bool.h" />
-    <ClInclude Include="linq_data.h" />
-    <ClInclude Include="linq_math.h" />
-    <ClInclude Include="linq_query.h" />
-    <ClInclude Include="linq_set.h" />
+    <ClInclude Include="../src/clinq.h" />
+    <ClInclude Include="../src/darray.h" />
+    <ClInclude Include="../src/functions.h" />
+    <ClInclude Include="../src/LINQ.h" />
+    <ClInclude Include="../src/linq_bool.h" />
+    <ClInclude Include="../src/linq_data.h" />
+    <ClInclude Include="../src/linq_math.h" />
+    <ClInclude Include="../src/linq_query.h" />
+    <ClInclude Include="../src/linq_set.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="darray.c" />
-    <ClCompile Include="darray_dispatcher.c" />
-    <ClCompile Include="linq.c" />
+    <ClCompile Include="../src/darray.c" />
+    <ClCompile Include="../src/darray_dispatcher.c" />
+    <ClCompile Include="../src/linq.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
