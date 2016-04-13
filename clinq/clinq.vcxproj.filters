@@ -8,28 +8,26 @@
     <ClInclude Include="collection.h">
       <Filter>Collection</Filter>
     </ClInclude>
-    <ClInclude Include="LINQ.h">
-      <Filter>LINQ</Filter>
-    </ClInclude>
-    <ClInclude Include="linq_math.h">
-      <Filter>LINQ\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="linq_bool.h">
-      <Filter>LINQ\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="linq_set.h">
-      <Filter>LINQ\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="linq_query.h">
-      <Filter>LINQ\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="functions.h">
       <Filter>Collection</Filter>
     </ClInclude>
-    <ClInclude Include="linq_data.h">
-      <Filter>LINQ\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="darray.h" />
+    <ClInclude Include="linq_bool.h">
+      <Filter>LINQ</Filter>
+    </ClInclude>
+    <ClInclude Include="linq_data.h">
+      <Filter>LINQ</Filter>
+    </ClInclude>
+    <ClInclude Include="linq_math.h">
+      <Filter>LINQ</Filter>
+    </ClInclude>
+    <ClInclude Include="linq_query.h">
+      <Filter>LINQ</Filter>
+    </ClInclude>
+    <ClInclude Include="linq_set.h">
+      <Filter>LINQ</Filter>
+    </ClInclude>
+    <ClInclude Include="LINQ.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="list.c">
@@ -38,23 +36,9 @@
     <ClCompile Include="collection.c">
       <Filter>Collection</Filter>
     </ClCompile>
-    <ClCompile Include="linq_set.c">
-      <Filter>LINQ\Impl</Filter>
-    </ClCompile>
-    <ClCompile Include="linq_query.c">
-      <Filter>LINQ\Impl</Filter>
-    </ClCompile>
-    <ClCompile Include="linq_bool.c">
-      <Filter>LINQ\Impl</Filter>
-    </ClCompile>
-    <ClCompile Include="linq_math.c">
-      <Filter>LINQ\Impl</Filter>
-    </ClCompile>
-    <ClCompile Include="linq_data.c">
-      <Filter>LINQ\Impl</Filter>
-    </ClCompile>
     <ClCompile Include="darray.c" />
     <ClCompile Include="darray_dispatcher.c" />
+    <ClCompile Include="linq.c" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collection">
@@ -62,12 +46,6 @@
     </Filter>
     <Filter Include="LINQ">
       <UniqueIdentifier>{6d3aabd1-2b79-4085-9338-f781f07b496f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="LINQ\Headers">
-      <UniqueIdentifier>{2be1a4ee-7f4b-4097-b6f8-aafd6ed9851c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="LINQ\Impl">
-      <UniqueIdentifier>{197652f0-4147-4fd8-b1c5-d81d8c75b739}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

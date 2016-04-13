@@ -1,7 +1,6 @@
 #include <limits.h>
 #include <stdlib.h>
 
-
 #include "LINQ.h"
 #include "functions.h"
 #include "darray.h"
@@ -112,6 +111,7 @@ CLQ_COLLECTION *clq_linq_skip_while(CLQ_COLLECTION *src, PREDICATE)
 
 	return linq_skip_while(arr, predicate);
 }
+
 CLQ_COLLECTION *clq_linq_take(CLQ_COLLECTION *src, int count)
 {
 	darray_t *arr = (darray_t *)src;

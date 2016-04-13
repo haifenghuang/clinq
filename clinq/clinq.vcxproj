@@ -89,11 +89,7 @@
     <ClCompile Include="collection.c" />
     <ClCompile Include="darray.c" />
     <ClCompile Include="darray_dispatcher.c" />
-    <ClCompile Include="linq_bool.c" />
-    <ClCompile Include="linq_data.c" />
-    <ClCompile Include="linq_math.c" />
-    <ClCompile Include="linq_query.c" />
-    <ClCompile Include="linq_set.c" />
+    <ClCompile Include="linq.c" />
     <ClCompile Include="list.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
