@@ -4,6 +4,8 @@
 #include "LINQ.h"
 #include "darray.h"
 
+static int attempt_add(CLQ_COLLECTION *src, void *item);
+
 // BOOL Functions
 // ---------------
 int linq_all(darray_t *src, PREDICATE)
@@ -42,20 +44,12 @@ CLQ_COLLECTION *linq_concat(darray_t *src, darray_t *second)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		if (!clq_insert(newCol, &src->data[i]))
-		{
-			clq_destory(newCol);
-			return NULL;
-		}
+		if (!attempt_add(newCol, &src->data[i])) { return NULL; }
 	}
 
 	for (int i = 0; i < src->size; i++)
 	{
-		if (!clq_insert(&newCol, &second->data[i]))
-		{
-			clq_destory(newCol);
-			return NULL;
-		}
+		if (!attempt_add(newCol, &second->data[i])) { return NULL; }
 	}
 
 	return newCol;
@@ -70,11 +64,7 @@ CLQ_COLLECTION	*linq_default_if_empty(darray_t *src, void *default_value)
 		newCol = clq_create();
 		if (!newCol) { return NULL; }
 
-		if (!clq_insert(newCol, &default_value))
-		{
-			clq_destory(newCol);
-			return NULL;
-		}
+		if (!attempt_add(newCol, &default_value)) { return NULL; }
 	}
 
 	return (newCol) ? newCol : src;
@@ -100,11 +90,7 @@ CLQ_COLLECTION *linq_skip(darray_t *src, int count)
 
 	for (int i = count; i < src->size; i++)
 	{
-		if (!clq_insert(newCol, &src->data[i]))
-		{
-			clq_destory(newCol);
-			return NULL;
-		}
+		if (!attempt_add(newCol, &src->data[i])) { return NULL; }
 	}
 
 	return newCol;
@@ -123,11 +109,7 @@ CLQ_COLLECTION *linq_skip_while(darray_t *src, PREDICATE)
 
 	for (int i = index; i < src->size; i++)
 	{
-		if (!clq_insert(newCol, &src->data[i]))
-		{
-			clq_destory(newCol);
-			return NULL;
-		}
+		if (!attempt_add(newCol, &src->data[i])) { return NULL; }
 	}
 
 	return newCol;
@@ -142,11 +124,7 @@ CLQ_COLLECTION *linq_take(darray_t *src, int count)
 
 	for (int i = 0; i < itemCount; i++)
 	{
-		if (!clq_insert(newCol, &src->data[i]))
-		{
-			clq_destory(newCol);
-			return NULL;
-		}
+		if (!attempt_add(newCol, &src->data[i])) { return NULL; }
 	}
 
 	return newCol;
@@ -161,11 +139,7 @@ CLQ_COLLECTION	*linq_take_while(darray_t *src, PREDICATE)
 	{
 		if (predicate(&src->data[i]))
 		{
-			if (!clq_insert(newCol, &src->data[i]))
-			{
-				clq_destory(newCol);
-				return NULL;
-			}
+			if (!attempt_add(newCol, &src->data[i])) { return NULL; }
 		}
 		else { break; }
 	}
@@ -340,11 +314,7 @@ CLQ_COLLECTION *linq_where(darray_t *src, INDEX_PREDICATE)
 	{
 		if (predicate(&src->data[i], i))
 		{
-			if (!clq_insert(newCol, &src->data[i]))
-			{
-				clq_destory(newCol);
-				return NULL;
-			}
+			if (!attempt_add(newCol, &src->data[i])) { return NULL; }
 		}
 	}
 
@@ -358,3 +328,18 @@ CLQ_COLLECTION *linq_distinct(darray_t *src, EQ_COMPARITOR) { return NULL; }
 CLQ_COLLECTION *linq_except(darray_t *src, darray_t *second, EQ_COMPARITOR) { return NULL; }
 CLQ_COLLECTION *linq_intersect(darray_t *src, darray_t *second, EQ_COMPARITOR) { return NULL; }
 CLQ_COLLECTION *linq_union(darray_t *src, darray_t *second, EQ_COMPARITOR) { return NULL; }
+
+
+// HELPER functions
+// --------------
+static int attempt_add(CLQ_COLLECTION *src, void *item)
+{
+	if (!clq_insert(src, &item))
+	{
+		clq_destory(src);
+		return 0;
+	}
+
+	return 1;
+}
+
