@@ -4,6 +4,8 @@
 #include "darray.h"
 #include "functions.h"
 
+static int resize_array(darray_t *arr);
+
 darray_t *darray_create()
 {
 	darray_t *dArray = malloc(sizeof(darray_t));
@@ -34,14 +36,7 @@ void darray_destory(darray_t *arr)
 
 int darray_insert(darray_t *arr, void *element)
 {
-	if (arr->size == arr->array_size)
-	{
-		void **temp = realloc(arr->data, sizeof(void *) * (arr->array_size * ARRAY_GROW_FACTOR));
-		if (!temp) { return 0; }
-
-		arr->data = temp;
-		arr->array_size *= 2;
-	}
+	if (!resize_array(arr)) { return 0; }
 
 	arr->data[arr->size++] = element;
 	return 1;
@@ -55,17 +50,7 @@ int darray_insert_distinct(darray_t *arr, void *element, EQ_COMPARITOR)
 		if (equality_comparitor(element, arr->data[i])) { return 0; }
 	}
 
-	//Resize list if required
-	if (arr->size == arr->array_size)
-	{
-		void **temp = realloc(arr->data, sizeof(void *) * (arr->array_size * 2));
-		if (!temp) { return 0; }
-
-		arr->data = temp;
-		arr->array_size *= 2;
-
-		printf("Reallocted to size: %d\n", arr->array_size);
-	}
+	if (!resize_array(arr)) { return 0; }
 
 	//Insert item
 	arr->data[arr->size++] = element;
@@ -103,4 +88,15 @@ int darray_delete_where(darray_t *arr, PREDICATE, FREE_FUNC)
 	return 1;
 }
 
+
+static int resize_array(darray_t *arr)
+{
+	void **temp = realloc(arr->data, sizeof(void *) * (arr->array_size * 2));
+	if (!temp) { return 0; }
+
+	arr->data = temp;
+	arr->array_size *= 2;
+
+	return 1;
+}
 
