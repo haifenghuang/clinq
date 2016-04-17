@@ -59,7 +59,7 @@ int darray_insert_distinct(darray_t *arr, void *element, EQ_COMPARITOR)
 
 int darray_clear(darray_t *arr, FREE_FUNC)
 {
-	for (int i = 0; i < arr->size; i++)
+	for (long i = 0; i < arr->size; i++)
 	{
 		if (free_func) { free_func(&arr->data[i]); }
 		arr->data[i] = NULL;
@@ -73,7 +73,7 @@ int darray_delete_where(darray_t *arr, PREDICATE, FREE_FUNC)
 {
 	int shift_val = 0;
 
-	for (int i = 0; i < arr->size; i++)
+	for (long i = 0; i < arr->size; i++)
 	{
 		if (predicate(arr->data[i]))
 		{

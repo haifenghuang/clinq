@@ -10,7 +10,7 @@ static int attempt_add(CLQ_COLLECTION *src, void *item);
 // ---------------
 int linq_all(darray_t *src, PREDICATE)
 {
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		if (!predicate(&src->data[i])) { return 0; }
 	}
@@ -19,7 +19,7 @@ int linq_all(darray_t *src, PREDICATE)
 
 int linq_any(darray_t *src, PREDICATE)
 {
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		if (predicate(&src->data[i])) { return 1; }
 	}
@@ -28,7 +28,7 @@ int linq_any(darray_t *src, PREDICATE)
 
 int linq_contains(darray_t *src, void *element, EQ_COMPARITOR)
 {
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		if (equality_comparitor(&element, &src->data[i])) { return 1; }
 	}
@@ -42,12 +42,12 @@ CLQ_COLLECTION *linq_concat(darray_t *src, darray_t *second)
 	CLQ_COLLECTION *newCol = clq_create();
 	if (!newCol) { return NULL; }
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		if (!attempt_add(newCol, &src->data[i])) { return NULL; }
 	}
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		if (!attempt_add(newCol, &second->data[i])) { return NULL; }
 	}
@@ -72,7 +72,7 @@ CLQ_COLLECTION	*linq_default_if_empty(darray_t *src, void *default_value)
 
 CLQ_COLLECTION	*linq_reverse(darray_t *src)
 {
-	for (int i = 0; i < (src->size / 2); i++)
+	for (long i = 0; i < (src->size / 2); i++)
 	{
 		void *temp = src->data[i];
 		src->data[i] = src->data[(src->size - i)];
@@ -122,7 +122,7 @@ CLQ_COLLECTION *linq_take(darray_t *src, int count)
 	CLQ_COLLECTION *newCol = clq_create();
 	if (!newCol) { return NULL; }
 
-	for (int i = 0; i < itemCount; i++)
+	for (long i = 0; i < itemCount; i++)
 	{
 		if (!attempt_add(newCol, &src->data[i])) { return NULL; }
 	}
@@ -135,7 +135,7 @@ CLQ_COLLECTION	*linq_take_while(darray_t *src, PREDICATE)
 	CLQ_COLLECTION *newCol = clq_create();
 	if (!newCol) { return NULL; }
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		if (predicate(&src->data[i]))
 		{
@@ -153,7 +153,7 @@ int	linq_max(darray_t *src, int TRANSFORM)
 {
 	int maxVal = INT_MIN;
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		int elementVal = transform(&src->data[i]);
 		if (elementVal > maxVal) { maxVal = elementVal; }
@@ -166,7 +166,7 @@ int	linq_min(darray_t *src, int TRANSFORM)
 {
 	int minVal = INT_MAX;
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		int elementVal = transform(&src->data[i]);
 		if (elementVal < minVal) { minVal = elementVal; }
@@ -180,7 +180,7 @@ long linq_sum(darray_t *src, int TRANSFORM)
 {
 	long sum = 0L;
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		sum += transform(&src->data[i]);
 	}
@@ -199,7 +199,7 @@ void *linq_max_element(darray_t *src, int TRANSFORM)
 	int maxVal = INT_MIN;
 	void *maxEle = NULL;
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		int elementVal = transform(&src->data[i]);
 
@@ -218,7 +218,7 @@ void *linq_min_element(darray_t *src, int TRANSFORM)
 	int minVal = INT_MAX;
 	void * minEle = NULL;
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		int elementVal = transform(&src->data[i]);
 
@@ -238,7 +238,7 @@ int	linq_count(darray_t *src, PREDICATE)
 {
 	int count = 0;
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		if (predicate(src->data[i])) { count++; }
 	}
@@ -279,7 +279,7 @@ void *linq_last(darray_t *src, PREDICATE, void *default_value)
 {
 	void *element = NULL;
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		if (predicate(&src->data[i])) { element = src->data[i]; }
 	}
@@ -292,7 +292,7 @@ void *linq_single(darray_t *src, PREDICATE, void *default_value)
 	int		numFound = 0;
 	void	*element = NULL;
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		if (predicate(&src->data[i]))
 		{
@@ -310,7 +310,7 @@ CLQ_COLLECTION *linq_where(darray_t *src, INDEX_PREDICATE)
 	CLQ_COLLECTION *newCol = clq_create();
 	if (!newCol) { return NULL; }
 
-	for (int i = 0; i < src->size; i++)
+	for (long i = 0; i < src->size; i++)
 	{
 		if (predicate(&src->data[i], i))
 		{
