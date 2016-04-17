@@ -76,7 +76,7 @@ int darray_clear(darray_t *arr, FREE_FUNC)
 {
 	for (int i = 0; i < arr->size; i++)
 	{
-		if (free_func) { free_func(arr->data[i]); }
+		if (free_func) { free_func(&arr->data[i]); }
 		arr->data[i] = NULL;
 	}
 
@@ -92,7 +92,7 @@ int darray_delete_where(darray_t *arr, PREDICATE, FREE_FUNC)
 	{
 		if (predicate(arr->data[i]))
 		{
-			if (free_func) { free_func(arr->data[i]); }
+			if (free_func) { free_func(&arr->data[i]); }
 			shift_val++;
 		}
 

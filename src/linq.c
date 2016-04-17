@@ -10,7 +10,7 @@ int linq_all(darray_t *src, PREDICATE)
 {
 	for (int i = 0; i < src->size; i++)
 	{
-		if (!predicate(src->data[i])) { return 0; }
+		if (!predicate(&src->data[i])) { return 0; }
 	}
 	return 1;
 }
@@ -19,7 +19,7 @@ int linq_any(darray_t *src, PREDICATE)
 {
 	for (int i = 0; i < src->size; i++)
 	{
-		if (predicate(src->data[i])) { return 1; }
+		if (predicate(&src->data[i])) { return 1; }
 	}
 	return 0;
 }
@@ -28,7 +28,7 @@ int linq_contains(darray_t *src, void *element, EQ_COMPARITOR)
 {
 	for (int i = 0; i < src->size; i++)
 	{
-		if (equality_comparitor(element, src->data[i])) { return 1; }
+		if (equality_comparitor(&element, &src->data[i])) { return 1; }
 	}
 	return 0;
 }
@@ -42,7 +42,7 @@ CLQ_COLLECTION *linq_concat(darray_t *src, darray_t *second)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		if (!clq_insert(newCol, src->data[i]))
+		if (!clq_insert(newCol, &src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -51,7 +51,7 @@ CLQ_COLLECTION *linq_concat(darray_t *src, darray_t *second)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		if (!clq_insert(newCol, second->data[i]))
+		if (!clq_insert(&newCol, &second->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -70,7 +70,7 @@ CLQ_COLLECTION	*linq_default_if_empty(darray_t *src, void *default_value)
 		newCol = clq_create();
 		if (!newCol) { return NULL; }
 
-		if (!clq_insert(newCol, default_value))
+		if (!clq_insert(newCol, &default_value))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -100,7 +100,7 @@ CLQ_COLLECTION *linq_skip(darray_t *src, int count)
 
 	for (int i = count; i < src->size; i++)
 	{
-		if (!clq_insert(newCol, src->data[i]))
+		if (!clq_insert(newCol, &src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -116,14 +116,14 @@ CLQ_COLLECTION *linq_skip_while(darray_t *src, PREDICATE)
 	CLQ_COLLECTION *newCol = clq_create();
 	if (!newCol) { return NULL; }
 
-	while (predicate(src->data[index]) && index < src->size)
+	while (predicate(&src->data[index]) && index < src->size)
 	{
 		index++;
 	}
 
 	for (int i = index; i < src->size; i++)
 	{
-		if (!clq_insert(newCol, src->data[i]))
+		if (!clq_insert(newCol, &src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -142,7 +142,7 @@ CLQ_COLLECTION *linq_take(darray_t *src, int count)
 
 	for (int i = 0; i < itemCount; i++)
 	{
-		if (!clq_insert(newCol, src->data[i]))
+		if (!clq_insert(newCol, &src->data[i]))
 		{
 			clq_destory(newCol);
 			return NULL;
@@ -159,9 +159,9 @@ CLQ_COLLECTION	*linq_take_while(darray_t *src, PREDICATE)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		if (predicate(src->data[i]))
+		if (predicate(&src->data[i]))
 		{
-			if (!clq_insert(newCol, src->data[i]))
+			if (!clq_insert(newCol, &src->data[i]))
 			{
 				clq_destory(newCol);
 				return NULL;
@@ -181,7 +181,7 @@ int	linq_max(darray_t *src, int TRANSFORM)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		int elementVal = transform(src->data[i]);
+		int elementVal = transform(&src->data[i]);
 		if (elementVal > maxVal) { maxVal = elementVal; }
 	}
 
@@ -194,7 +194,7 @@ int	linq_min(darray_t *src, int TRANSFORM)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		int elementVal = transform(src->data[i]);
+		int elementVal = transform(&src->data[i]);
 		if (elementVal < minVal) { minVal = elementVal; }
 	}
 
@@ -208,7 +208,7 @@ long linq_sum(darray_t *src, int TRANSFORM)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		sum += transform(src->data[i]);
+		sum += transform(&src->data[i]);
 	}
 
 	return sum;
@@ -227,7 +227,7 @@ void *linq_max_element(darray_t *src, int TRANSFORM)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		int elementVal = transform(src->data[i]);
+		int elementVal = transform(&src->data[i]);
 
 		if (elementVal > maxVal)
 		{
@@ -236,7 +236,7 @@ void *linq_max_element(darray_t *src, int TRANSFORM)
 		}
 	}
 
-	return maxEle;
+	return &maxEle;
 }
 
 void *linq_min_element(darray_t *src, int TRANSFORM)
@@ -246,7 +246,7 @@ void *linq_min_element(darray_t *src, int TRANSFORM)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		int elementVal = transform(src->data[i]);
+		int elementVal = transform(&src->data[i]);
 
 		if (elementVal < minVal)
 		{
@@ -255,7 +255,7 @@ void *linq_min_element(darray_t *src, int TRANSFORM)
 		}
 	}
 
-	return minEle;
+	return &minEle;
 }
 
 // QUERY Functions
@@ -278,7 +278,7 @@ long linq_long_count(darray_t *src, PREDICATE)
 
 	for (long i = 0; i < src->size; i++)
 	{
-		if (predicate(src->data[i])) { count++; }
+		if (predicate(&src->data[i])) { count++; }
 	}
 
 	return count;
@@ -286,19 +286,19 @@ long linq_long_count(darray_t *src, PREDICATE)
 
 void *linq_element_at(darray_t *src, int index, void *default_value)
 {
-	return (index <= src->size) ? src->data[index] : default_value;
+	return (index <= src->size) ? &src->data[index] : &default_value;
 }
 
 
 void *linq_first(darray_t *src, PREDICATE, void *default_value)
 {
 	int index = 0;
-	while (!predicate(src->data[index]) && index < src->size)
+	while (!predicate(&src->data[index]) && index < src->size)
 	{
 		index++;
 	}
 
-	return (index < src->size) ? src->data[index] : default_value;
+	return (index < src->size) ? &src->data[index] : &default_value;
 }
 
 void *linq_last(darray_t *src, PREDICATE, void *default_value)
@@ -307,10 +307,10 @@ void *linq_last(darray_t *src, PREDICATE, void *default_value)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		if (predicate(src->data[i])) { element = src->data[i]; }
+		if (predicate(&src->data[i])) { element = src->data[i]; }
 	}
 
-	return element;
+	return &element;
 }
 
 void *linq_single(darray_t *src, PREDICATE, void *default_value)
@@ -320,14 +320,14 @@ void *linq_single(darray_t *src, PREDICATE, void *default_value)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		if (predicate(src->data[i]))
+		if (predicate(&src->data[i]))
 		{
 			element = src->data[i];
 			numFound++;
 		}
 	}
 
-	return (numFound == 1) ? element : default_value;
+	return (numFound == 1) ? &element : &default_value;
 }
 
 
@@ -338,9 +338,9 @@ CLQ_COLLECTION *linq_where(darray_t *src, INDEX_PREDICATE)
 
 	for (int i = 0; i < src->size; i++)
 	{
-		if (predicate(src->data[i], i))
+		if (predicate(&src->data[i], i))
 		{
-			if (!clq_insert(newCol, src->data[i]))
+			if (!clq_insert(newCol, &src->data[i]))
 			{
 				clq_destory(newCol);
 				return NULL;
