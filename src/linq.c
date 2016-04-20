@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <limits.h>
 
+#include "clinq.h"
 #include "LINQ.h"
 #include "darray.h"
 
@@ -324,10 +325,93 @@ CLQ_COLLECTION *linq_where(darray_t *src, INDEX_PREDICATE)
 
 // SET Functions
 // ---------------
-CLQ_COLLECTION *linq_distinct(darray_t *src, EQ_COMPARITOR) { return NULL; }
-CLQ_COLLECTION *linq_except(darray_t *src, darray_t *second, EQ_COMPARITOR) { return NULL; }
-CLQ_COLLECTION *linq_intersect(darray_t *src, darray_t *second, EQ_COMPARITOR) { return NULL; }
-CLQ_COLLECTION *linq_union(darray_t *src, darray_t *second, EQ_COMPARITOR) { return NULL; }
+CLQ_COLLECTION *linq_distinct(darray_t *src, EQ_COMPARITOR)
+{ 
+	CLQ_COLLECTION *newCol = clq_create();
+	if (!newCol) { return NULL; }
+
+	for (long i = 0; i < src->size; i++)
+	{
+		long shouldAdd = -1;
+
+		//Search for item existing in the new collection
+		for (long j = 0; j < CLQ_SIZE(newCol); j++)
+		{
+			if (equality_comparitor(src->data[i], CLQ_ELEMENT_AT(newCol, j, &src->data[i]))) { shouldAdd++; }
+		}
+
+		//Add the item if none was found!
+		if (shouldAdd < 0)
+		{
+			if (!attempt_add(newCol, src->data[i])) { return NULL; }
+		}
+	}
+
+	return newCol;
+}
+
+CLQ_COLLECTION *linq_except(darray_t *src, darray_t *second, EQ_COMPARITOR) 
+{
+	CLQ_COLLECTION *newCol = clq_create();
+	if (!newCol) { return NULL; }
+
+	for (long i = 0; i < src->size; i++)
+	{
+		long shouldAdd = -1;
+
+		for (long j = 0; j < second->size; j++)
+		{
+			if (equality_comparitor(src->data[i], second->data[j])) { shouldAdd++; }
+		}
+
+		if (shouldAdd < 0)
+		{
+			if (!attempt_add_distinct(newCol, equality_comparitor, src->data[i])) { return NULL; }
+		}
+	}
+
+	return newCol; 
+}
+
+CLQ_COLLECTION *linq_intersect(darray_t *src, darray_t *second, EQ_COMPARITOR)
+{
+	CLQ_COLLECTION *newCol = clq_create();
+	if (!newCol) { return NULL; }
+
+	for (long i = 0; i < src->size; i++)
+	{
+		for (long j = 0; j < second->size; j++)
+		{
+			if (equality_comparitor(src->data[i], second->data[j]))
+			{
+				if (!attempt_add_distinct(newCol, equality_comparitor, src->data[i]))
+				{
+					return NULL;
+				}
+			}
+		}
+	}
+
+	return newCol;
+}
+
+CLQ_COLLECTION *linq_union(darray_t *src, darray_t *second, EQ_COMPARITOR) 
+{
+	CLQ_COLLECTION *newCol = clq_create();
+	if (!newCol) { return NULL; }
+
+	for (long i = 0; i < src->size; i++)
+	{
+		if (!attempt_add_distinct(newCol, equality_comparitor, src->data[i])) { return NULL; }
+	}
+
+	for (long i = 0; i < second->size; i++)
+	{
+		if (!attempt_add_distinct(newCol, equality_comparitor, second->data[i])) { return NULL; }
+	}
+
+	return newCol;
+}
 
 
 // HELPER functions
@@ -335,6 +419,17 @@ CLQ_COLLECTION *linq_union(darray_t *src, darray_t *second, EQ_COMPARITOR) { ret
 static int attempt_add(CLQ_COLLECTION *src, void *item)
 {
 	if (!clq_insert(src, &item))
+	{
+		clq_destory(src);
+		return 0;
+	}
+
+	return 1;
+}
+
+static int attempt_add_distinct(CLQ_COLLECTION *src, EQ_COMPARITOR, void *item)
+{
+	if (!clq_insert_distinct(src, equality_comparitor, &item))
 	{
 		clq_destory(src);
 		return 0;
